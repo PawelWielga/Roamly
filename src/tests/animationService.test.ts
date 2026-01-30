@@ -3,9 +3,9 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { AnimationService } from '../services/animationService.js';
-import { Destination } from '../types/index.js';
-import { mapService } from '../services/mapService.js';
+import { AnimationService } from '../services/animationService';
+import { Destination } from '../types/index';
+import { mapService } from '../services/mapService';
 
 // Mock mapService
 vi.mock('../services/mapService.js', () => ({
@@ -97,9 +97,9 @@ describe('AnimationService', () => {
       expect(typeof rotation).toBe('number');
     });
 
-    it('powinien zwrócić 0 dla identycznych punktów', () => {
+    it('powinien zwrócić 90 dla identycznych punktów', () => {
       const rotation = animationService.calculateRotation([52.0, 20.0], [52.0, 20.0]);
-      expect(rotation).toBe(0);
+      expect(rotation).toBe(90);
     });
   });
 

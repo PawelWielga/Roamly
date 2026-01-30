@@ -1,5 +1,5 @@
 import L from 'leaflet';
-import { Destination, MapConfig, ZoomOptions } from '../types/index.js';
+import { Destination, MapConfig, ZoomOptions } from '../types/index';
 import {
   DEFAULT_MAP_CONFIG,
   TILE_LAYER_URL,
@@ -7,7 +7,7 @@ import {
   ROUTE_ZOOM_OPTIONS,
   ALL_DESTINATIONS_ZOOM_OPTIONS,
   DETAILS_ZOOM_OPTIONS,
-} from '../constants/mapConfig.js';
+} from '../constants/mapConfig';
 
 /**
  * Serwis odpowiedzialny za zarządzanie mapą Leaflet

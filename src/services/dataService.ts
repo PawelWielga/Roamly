@@ -1,4 +1,4 @@
-import { Destination, DestinationsData } from '../types/index.js';
+import { Destination, DestinationsData } from '../types/index';
 
 /**
  * Serwis odpowiedzialny za ładowanie i zarządzanie danymi podróży

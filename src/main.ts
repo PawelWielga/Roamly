@@ -3,7 +3,14 @@
  * Inicjalizuje aplikację po załadowaniu DOM
  */
 
-import { app } from './app/app.js';
+import { app } from './app/app';
+
+/**
+ * Interfejs rozszerzający Window
+ */
+interface RoamlyWindow extends Window {
+  roamlyApp?: typeof app;
+}
 
 /**
  * Funkcja inicjalizująca aplikację
@@ -28,5 +35,5 @@ if (document.readyState === 'loading') {
 
 // Eksportuj aplikację dla celów deweloperskich
 if (typeof window !== 'undefined') {
-  (window as any).roamlyApp = app;
+  (window as RoamlyWindow).roamlyApp = app;
 }

@@ -1,4 +1,4 @@
-import { MapConfig, AnimationConfig } from '../types/index.js';
+import { MapConfig, AnimationConfig } from '../types/index';
 
 /**
  * Domyślna konfiguracja mapy

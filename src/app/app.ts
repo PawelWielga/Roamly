@@ -1,13 +1,13 @@
-import { Destination } from '../types/index.js';
-import { dataService } from '../services/dataService.js';
-import { mapService } from '../services/mapService.js';
-import { animationService } from '../services/animationService.js';
-import { uiService } from '../services/uiService.js';
+import { Destination } from '../types/index';
+import { dataService } from '../services/dataService';
+import { mapService } from '../services/mapService';
+import { animationService } from '../services/animationService';
+import { uiService } from '../services/uiService';
 import {
   ROUTE_ZOOM_OPTIONS,
   ALL_DESTINATIONS_ZOOM_OPTIONS,
   DETAILS_ZOOM_OPTIONS,
-} from '../constants/mapConfig.js';
+} from '../constants/mapConfig';
 
 /**
  * Główna klasa aplikacji Roamly

@@ -1,4 +1,4 @@
-import { VehicleIcon, VehicleType } from '../types/index.js';
+import { VehicleIcon, VehicleType } from '../types/index';
 
 /**
  * Stałe SVG dla ikon pojazdów

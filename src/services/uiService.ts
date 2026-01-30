@@ -1,5 +1,5 @@
-import { Destination } from '../types/index.js';
-import { STATUS_TEXTS, getMovingStatusText } from '../constants/mapConfig.js';
+import { Destination } from '../types/index';
+import { STATUS_TEXTS, getMovingStatusText } from '../constants/mapConfig';
 
 /**
  * Serwis odpowiedzialny za zarządzanie interfejsem użytkownika

@@ -3,8 +3,8 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { DataService } from '../services/dataService.js';
-import { Destination } from '../types/index.js';
+import { DataService } from '../services/dataService';
+import { Destination } from '../types/index';
 
 describe('DataService', () => {
   let dataService: DataService;

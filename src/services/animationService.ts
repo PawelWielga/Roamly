@@ -1,7 +1,7 @@
-import { Destination, VehicleType } from '../types/index.js';
-import { DEFAULT_ANIMATION_CONFIG } from '../constants/mapConfig.js';
-import { getVehicleSvg, getVehicleColor, getVehicleDashArray } from '../constants/vehicleIcons.js';
-import { mapService } from './mapService.js';
+import { Destination, VehicleType } from '../types/index';
+import { DEFAULT_ANIMATION_CONFIG } from '../constants/mapConfig';
+import { getVehicleSvg, getVehicleColor, getVehicleDashArray } from '../constants/vehicleIcons';
+import { mapService } from './mapService';
 
 /**
  * Serwis odpowiedzialny za animację pojazdów na mapie
@@ -46,7 +46,7 @@ export class AnimationService {
     for (let i = 0; i <= steps; i++) {
       const f = i / steps;
       let lat = start[0] + (end[0] - start[0]) * f;
-      let lng = start[1] + (end[1] - start[1]) * f;
+      const lng = start[1] + (end[1] - start[1]) * f;
 
       // Dodaj krzywiznę dla samolotów
       if (type === 'plane') {
