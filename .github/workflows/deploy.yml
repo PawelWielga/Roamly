@@ -31,13 +31,14 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Move files to dist root
+      - name: Clean dist directory
         run: |
+          rm -f dist/index.html dist/styles.css
           mv dist/public/* dist/
           rmdir dist/public
 
       - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist

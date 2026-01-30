@@ -2,6 +2,8 @@
  * Główne style dla aplikacji Roamly
  */
 
+@import "tailwindcss";
+
 /* Reset i podstawowe style */
 *,
 *::before,
