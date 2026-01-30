@@ -1,274 +1,64 @@
 <!DOCTYPE html>
 <html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moja Mapa Podróży - Różne Środki Transportu</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Interaktywna mapa podróży z animacjami pojazdów" />
+    <meta name="author" content="Roamly" />
+    <title>Roamly - Moja Mapa Podróży</title>
+
     <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        #map {
-            height: 100vh;
-            width: 100%;
-            background: #aad3df;
-        }
 
-        .vehicle-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: none !important; 
-        }
-
-        .vehicle-icon-svg {
-            transition: transform 0.1s linear;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-            will-change: transform;
-        }
-
-        @keyframes landing {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(0); opacity: 0; }
-        }
-
-        .vehicle-landing {
-            animation: landing 0.5s forwards;
-        }
-
-        .details-card {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2000;
-            width: 90%;
-            max-width: 400px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            overflow: hidden;
-            animation: slideUp 0.4s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { transform: translate(-50%, 100%); }
-            to { transform: translate(-50%, 0); }
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.3);
-            z-index: 1500;
-        }
-    </style>
-</head>
-<body class="m-0 p-0 overflow-hidden font-sans">
-
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="m-0 p-0 overflow-hidden font-sans">
+    <!-- Map Container -->
     <div id="map"></div>
 
-    <div id="overlay" class="overlay" onclick="closeDetails()"></div>
+    <!-- Overlay -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Details Card -->
     <div id="detailsCard" class="details-card">
-        <div id="destImage" class="h-48 bg-cover bg-center bg-gray-200"></div>
-        <div class="p-6">
-            <h2 id="destTitle" class="text-2xl font-bold text-gray-800 mb-2"></h2>
-            <p id="destDate" class="text-sm text-blue-600 font-semibold mb-3"></p>
-            <p id="destDesc" class="text-gray-600 leading-relaxed"></p>
-            <button onclick="closeDetails()" class="mt-6 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">Zamknij</button>
-        </div>
+      <div id="destImage" class="dest-image"></div>
+      <div class="details-content">
+        <h2 id="destTitle" class="dest-title"></h2>
+        <p id="destDate" class="dest-date"></p>
+        <p id="destDesc" class="dest-description"></p>
+        <button id="closeButton" class="close-button">Zamknij</button>
+      </div>
     </div>
 
-    <div class="fixed top-4 left-1/2 -translate-x-1/2 z-[1000] bg-white/90 backdrop-blur px-4 py-2 rounded-full shadow-md pointer-events-none text-center">
-        <p id="statusText" class="text-sm font-medium text-gray-700">Wybierz cel podróży na mapie ✈️ 🚆 🚗</p>
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <p id="statusText" class="status-text">Wybierz cel podróży na mapie ✈️ 🚆 🚗</p>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="footer-text">
+        Stworzone z ❤️ przez <a href="https://pawelwielga.dihor.pl/" target="_blank" rel="noopener noreferrer" class="footer-link">DIHOR Paweł Wielga</a>
+      </p>
+    </footer>
 
     <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        const icons = {
-            plane: `<svg class="vehicle-icon-svg" width="30" height="30" viewBox="0 0 24 24" fill="#1e40af" xmlns="http://www.w3.org/2000/svg"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>`,
-            train: `<svg class="vehicle-icon-svg" width="30" height="30" viewBox="0 0 24 24" fill="#b91c1c" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c-4 0-8 .5-8 4v9.5C4 17.43 5.57 19 7.5 19L6 20.5v.5h12v-.5L16.5 19c1.93 0 3.5-1.57 3.5-3.5V6c0-3.5-4-4-8-4zM7.5 17c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm3.5-6H7V6h4v5zm5 6c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1-6h-4V6h4v5z"/></svg>`,
-            car: `<svg class="vehicle-icon-svg" width="30" height="30" viewBox="0 0 24 24" fill="#15803d" xmlns="http://www.w3.org/2000/svg"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42.99L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>`
-        };
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
 
-        const destinations = [
-            { id: 1, type: 'plane', start: [52.1672, 20.9679], name: "Valletta, Malta", coords: [35.8989, 14.5146], date: "Sierpień 2023", desc: "Słoneczna wyspa pełna historii.", img: "https://images.unsplash.com/photo-1516471841702-81e39a0ff39a?auto=format&fit=crop&w=600" },
-            { id: 2, type: 'plane', start: [52.1672, 20.9679], name: "Budapeszt, Węgry", coords: [47.4979, 19.0402], date: "Grudzień 2023", desc: "Perła Dunaju i piękne termy.", img: "https://images.unsplash.com/photo-1517713982677-4b66332f98de?auto=format&fit=crop&w=600" },
-            { id: 3, type: 'plane', start: [52.1672, 20.9679], name: "Pafos, Cypr", coords: [34.7720, 32.4297], date: "Maj 2024", desc: "Kolebka Afrodyty.", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600" },
-            { id: 4, type: 'plane', start: [52.1672, 20.9679], name: "Alicante, Hiszpania", coords: [38.3452, -0.4810], date: "Lipiec 2024", desc: "Słońce na Costa Blanca.", img: "https://images.unsplash.com/photo-1560942485-b2a11cc13456?auto=format&fit=crop&w=600" },
-            { id: 5, type: 'train', start: [53.7784, 20.4801], name: "Kraków, Polska", coords: [50.0647, 19.9450], date: "Październik 2024", desc: "Podróż pociągiem PKP Intercity na południe Polski.", img: "https://images.unsplash.com/photo-1512470876302-972fad2aa9dd?auto=format&fit=crop&w=600" },
-            { id: 6, type: 'car', start: [53.7784, 20.4801], name: "Gdańsk, Polska", coords: [54.3520, 18.6466], date: "Listopad 2024", desc: "Szybki wypad samochodem nad morze siódemką.", img: "https://images.unsplash.com/photo-1565039230199-bf93332d7335?auto=format&fit=crop&w=600" }
-        ];
-
-        const map = L.map('map', {
-            center: [52, 19],
-            zoom: 5,
-            minZoom: 2,
-            markerZoomAnimation: false
-        });
-
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
-
-        let currentVehicle = null;
-        let currentPath = null;
-        let isMoving = false;
-
-        const allBounds = L.latLngBounds([]);
-        destinations.forEach(d => {
-            allBounds.extend(d.coords);
-            allBounds.extend(d.start);
-            const marker = L.marker(d.coords).addTo(map);
-            marker.on('click', () => {
-                if (!isMoving) prepareJourney(d);
-            });
-        });
-
-        map.fitBounds(allBounds, { padding: [80, 80] });
-
-        function getPathPoints(start, end, type, steps = 200) {
-            const points = [];
-            for (let i = 0; i <= steps; i++) {
-                const f = i / steps;
-                let lat = start[0] + (end[0] - start[0]) * f;
-                let lng = start[1] + (end[1] - start[1]) * f;
-                if (type === 'plane') {
-                    const curveFactor = (end[1] - start[1]) * 0.15;
-                    const offset = Math.sin(Math.PI * f) * curveFactor;
-                    lat += offset;
-                }
-                points.push([lat, lng]);
-            }
-            return points;
-        }
-
-        function calculateRotation(p1, p2) {
-            if (!p1 || !p2) return 0;
-            const dy = p2[0] - p1[0];
-            const dx = p2[1] - p1[1];
-            return 90 - (Math.atan2(dy, dx) * 180 / Math.PI);
-        }
-
-        // Nowa funkcja przygotowująca - najpierw zoom, potem lot
-        function prepareJourney(dest) {
-            isMoving = true;
-            document.getElementById('statusText').innerText = `🔍 Przygotowanie trasy do: ${dest.name}...`;
-
-            // Obliczamy granice tylko dla tej konkretnej trasy
-            const routeBounds = L.latLngBounds([dest.start, dest.coords]);
-            
-            // Wykonujemy zoom do konkretnej trasy
-            map.flyToBounds(routeBounds, { 
-                padding: [100, 100], 
-                duration: 1.2,
-                easeLinearity: 0.25
-            });
-
-            // Czekamy na zakończenie animacji zoomu (moveend) przed startem pojazdu
-            map.once('moveend', () => {
-                setTimeout(() => startJourney(dest), 200);
-            });
-        }
-
-        function startJourney(dest) {
-            if (currentVehicle) map.removeLayer(currentVehicle);
-            if (currentPath) map.removeLayer(currentPath);
-
-            const pathPoints = getPathPoints(dest.start, dest.coords, dest.type);
-            const colors = { plane: '#3b82f6', train: '#b91c1c', car: '#15803d' };
-            
-            currentPath = L.polyline([], {
-                color: colors[dest.type],
-                weight: 3,
-                opacity: 0.6,
-                lineJoin: 'round',
-                dashArray: dest.type === 'plane' ? null : '5, 10'
-            }).addTo(map);
-
-            const vehicleIcon = L.divIcon({
-                html: icons[dest.type],
-                className: 'vehicle-container',
-                iconSize: [30, 30],
-                iconAnchor: [15, 15]
-            });
-
-            currentVehicle = L.marker(dest.start, { icon: vehicleIcon, interactive: false }).addTo(map);
-            
-            const duration = 2500; 
-            const startTime = performance.now();
-
-            function animate(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const floatIdx = progress * (pathPoints.length - 1);
-                const idx1 = Math.floor(floatIdx);
-                const idx2 = Math.min(idx1 + 1, pathPoints.length - 1);
-                const subProgress = floatIdx - idx1;
-
-                const p1 = pathPoints[idx1];
-                const p2 = pathPoints[idx2];
-
-                if (p1 && p2) {
-                    const currentPos = [
-                        p1[0] + (p2[0] - p1[0]) * subProgress,
-                        p1[1] + (p2[1] - p1[1]) * subProgress
-                    ];
-                    currentVehicle.setLatLng(currentPos);
-                    const el = currentVehicle.getElement();
-                    if (el) {
-                        const svg = el.querySelector('.vehicle-icon-svg');
-                        if (svg) svg.style.transform = `rotate(${calculateRotation(p1, p2)}deg)`;
-                    }
-                    currentPath.setLatLngs(pathPoints.slice(0, idx1 + 1).concat([currentPos]));
-                }
-
-                if (progress < 1) requestAnimationFrame(animate);
-                else finishJourney(dest);
-            }
-
-            requestAnimationFrame(animate);
-            const actionText = dest.type === 'plane' ? 'Lot' : (dest.type === 'train' ? 'Podróż pociągiem' : 'Przejazd samochodem');
-            document.getElementById('statusText').innerText = `🚀 ${actionText} do: ${dest.name}`;
-        }
-
-        function finishJourney(dest) {
-            const el = currentVehicle ? currentVehicle.getElement() : null;
-            if (el) {
-                const svg = el.querySelector('.vehicle-icon-svg');
-                if (svg) svg.classList.add('vehicle-landing');
-            }
-            setTimeout(() => {
-                showDetails(dest);
-                isMoving = false;
-                document.getElementById('statusText').innerText = `📍 Dotarto do celu: ${dest.name}`;
-            }, 500);
-        }
-
-        function showDetails(dest) {
-            document.getElementById('destTitle').innerText = dest.name;
-            document.getElementById('destDate').innerText = dest.date;
-            document.getElementById('destDesc').innerText = dest.desc;
-            document.getElementById('destImage').style.backgroundImage = `url(${dest.img})`;
-            document.getElementById('overlay').style.display = 'block';
-            document.getElementById('detailsCard').style.display = 'block';
-            map.flyTo(dest.coords, 10, { duration: 1.5 });
-        }
-
-        function closeDetails() {
-            document.getElementById('overlay').style.display = 'none';
-            document.getElementById('detailsCard').style.display = 'none';
-            if (currentPath) map.removeLayer(currentPath);
-            if (currentVehicle) map.removeLayer(currentVehicle);
-            map.fitBounds(allBounds, { padding: [80, 80], duration: 1.5 });
-            document.getElementById('statusText').innerText = "Wybierz cel podróży na mapie ✈️ 🚆 🚗";
-        }
-    </script>
-</body>
+    <!-- Main Application Script -->
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
