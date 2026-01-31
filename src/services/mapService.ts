@@ -8,6 +8,7 @@ import {
   ALL_DESTINATIONS_ZOOM_OPTIONS,
   DETAILS_ZOOM_OPTIONS,
 } from '../constants/mapConfig';
+import { getVehicleColor, getVehicleSvg } from '../constants/vehicleIcons';
 
 /**
  * Serwis odpowiedzialny za zarządzanie mapą Leaflet
@@ -58,7 +59,25 @@ export class MapService {
       throw new Error('Mapa nie jest zainicjalizowana');
     }
 
-    const marker = L.marker(destination.coords).addTo(this.map);
+    const markerColor = getVehicleColor(destination.type);
+
+    const markerIconHtml = `
+      <div class="destination-marker" style="--marker-color: ${markerColor};">
+        <span class="destination-marker__pulse"></span>
+        <span class="destination-marker__ring"></span>
+        <span class="destination-marker__icon">${getVehicleSvg(destination.type)}</span>
+      </div>
+    `;
+
+    const icon = L.divIcon({
+      html: markerIconHtml,
+      className: 'destination-marker-wrapper',
+      iconSize: [44, 44],
+      iconAnchor: [22, 22],
+      popupAnchor: [0, -22],
+    });
+
+    const marker = L.marker(destination.coords, { icon }).addTo(this.map);
 
     if (onClick) {
       marker.on('click', () => onClick(destination));

@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Interaktywna mapa podróży z animacjami pojazdów" />
+    <meta name="description" content="Interaktywna mapa podr&#243;&#380;y z animacjami pojazd&#243;w" />
     <meta name="author" content="Roamly" />
-    <title>Roamly - Moja Mapa Podróży</title>
+    <title>Roamly - Moja Mapa Podr&#243;&#380;y</title>
 
     <!-- Leaflet CSS -->
     <link
@@ -15,20 +15,18 @@
       crossorigin=""
     />
 
-    <!-- Google Fonts Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="m-0 p-0 overflow-hidden font-sans">
-    <!-- Header -->
-    <header class="app-header">
-      <h1 class="app-title">Roamly - Moja Mapa Podróży</h1>
-    </header>
-
     <!-- Content -->
     <div class="app-content">
       <!-- Side Panel -->
@@ -38,18 +36,23 @@
         <h4 class="filter-section-title">Lata</h4>
         <div id="yearFilters" class="filter-checkboxes"></div>
 
-        <h4 class="filter-section-title">Środki transportu</h4>
+        <h4 class="filter-section-title">&#346;rodki transportu</h4>
         <div id="vehicleFilters" class="filter-checkboxes"></div>
 
         <button id="resetFiltersBtn" class="reset-filters-btn">Resetuj filtry</button>
       </aside>
 
-      <button id="toggleFilterBtn" class="toggle-filter-btn" aria-label="Zwiń/rozwiń panel">
-        <span id="toggleIcon">◀</span>
+      <button id="toggleFilterBtn" class="toggle-filter-btn" aria-label="Zwi&#324;/rozwi&#324; panel">
+        <span id="toggleIcon">&#9664;</span>
       </button>
 
       <!-- Map Container -->
       <div id="map" class="map-container"></div>
+    </div>
+
+    <!-- Floating Island -->
+    <div class="floating-island" role="status" aria-live="polite">
+      <p id="statusText" class="floating-island-text">Wybierz cel podr&#243;&#380;y na mapie</p>
     </div>
 
     <!-- Overlay -->
@@ -66,17 +69,20 @@
       </div>
     </div>
 
-    <!-- Status Bar -->
-    <div class="status-bar">
-      <p id="statusText" class="status-text">Wybierz cel podróży na mapie ✈️ 🚆 🚗</p>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <p class="footer-text">
-        Stworzone z ❤️ przez <a href="https://pawelwielga.dihor.pl/" target="_blank" rel="noopener noreferrer" class="footer-link">DIHOR Paweł Wielga</a>
-      </p>
-    </footer>
+    <!-- Info Badge -->
+    <details class="info-badge">
+      <summary class="info-button" aria-label="Informacje o autorze" title="Informacje">i</summary>
+      <div class="info-panel">
+        <p class="info-text">
+          Stworzone z &#10084;&#65039; przez
+          <a
+            href="https://pawelwielga.dihor.pl/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="info-link">DIHOR Pawe&#322; Wielga</a>
+        </p>
+      </div>
+    </details>
 
     <!-- Leaflet JS -->
     <script

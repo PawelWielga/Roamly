@@ -23,12 +23,12 @@ export const DEFAULT_ANIMATION_CONFIG: AnimationConfig = {
  * URL warstwy kafelków mapy
  */
 export const TILE_LAYER_URL =
-  'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+  'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png';
 
 /**
  * Tekst atrybucji mapy
  */
-export const TILE_LAYER_ATTRIBUTION = '&copy; OpenStreetMap contributors';
+export const TILE_LAYER_ATTRIBUTION = '&copy; OpenStreetMap contributors &copy; CARTO';
 
 /**
  * Domyślne opcje zoomu do trasy
@@ -58,12 +58,12 @@ export const DETAILS_ZOOM_OPTIONS = {
  * Teksty statusu aplikacji
  */
 export const STATUS_TEXTS = {
-  IDLE: 'Wybierz cel podróży na mapie ✈️ 🚆 🚗',
-  PREPARING: (destination: string) => `🔍 Przygotowanie trasy do: ${destination}...`,
-  MOVING_PLANE: (destination: string) => `🚀 Lot do: ${destination}`,
-  MOVING_TRAIN: (destination: string) => `🚀 Podróż pociągiem do: ${destination}`,
-  MOVING_CAR: (destination: string) => `🚀 Przejazd samochodem do: ${destination}`,
-  ARRIVED: (destination: string) => `📍 Dotarto do celu: ${destination}`,
+  IDLE: 'Wybierz cel podróży na mapie',
+  PREPARING: (destination: string) => `Przygotowanie trasy: ${destination}`,
+  MOVING_PLANE: (destination: string) => `Lot do: ${destination}`,
+  MOVING_TRAIN: (destination: string) => `Podróż pociągiem do: ${destination}`,
+  MOVING_CAR: (destination: string) => `Przejazd samochodem do: ${destination}`,
+  ARRIVED: (destination: string) => `Dotarto do celu: ${destination}`,
 };
 
 /**
