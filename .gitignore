@@ -4,6 +4,7 @@ node_modules/
 .pnp.js
 
 # Build outputs
+# Note: dist/ is ignored on dev branch, but will contain compiled code on main branch
 dist/
 build/
 *.tsbuildinfo

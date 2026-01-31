@@ -1,20 +1,22 @@
-name: Deploy to GitHub Pages
+name: Deploy to Main
 
 on:
   push:
-    branches: [main, master]
+    branches: [dev]
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: dev
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -28,6 +30,9 @@ jobs:
       - name: Run linter
         run: npm run lint
 
+      - name: Type check
+        run: npx tsc --noEmit
+
       - name: Build project
         run: npm run build
 
@@ -37,8 +42,16 @@ jobs:
           mv dist/public/* dist/
           rmdir dist/public
 
-      - name: Deploy to gh-pages
+      - name: Copy README.md
+        run: cp README.md dist/
+
+      - name: Deploy to main branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          publish_branch: main
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Deploy built code from dev'
