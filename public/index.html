@@ -24,30 +24,40 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="m-0 p-0 overflow-hidden font-sans">
-    <!-- Filter Panel -->
-    <div id="filterPanel" class="filter-panel">
-      <button id="toggleFilterBtn" class="toggle-filter-btn" aria-label="Zwiń/rozwiń panel filtrów">
-        <span id="toggleIcon">◀</span>
-      </button>
-      <div class="filter-content">
-        <h3 class="filter-title">Filtry</h3>
-        
-        <div class="filter-section">
-          <h4 class="filter-section-title">Lata</h4>
-          <div id="yearFilters" class="filter-checkboxes"></div>
-        </div>
-        
-        <div class="filter-section">
-          <h4 class="filter-section-title">Środki transportu</h4>
-          <div id="vehicleFilters" class="filter-checkboxes"></div>
-        </div>
-        
-        <button id="resetFiltersBtn" class="reset-filters-btn">Resetuj filtry</button>
-      </div>
-    </div>
+    <!-- Header -->
+    <header class="app-header">
+      <h1 class="app-title">Roamly - Moja Mapa Podróży</h1>
+    </header>
 
-    <!-- Map Container -->
-    <div id="map"></div>
+    <!-- Content -->
+    <div class="app-content">
+      <!-- Side Menu -->
+      <aside class="side-menu">
+        <div id="filterPanel" class="filter-panel">
+          <button id="toggleFilterBtn" class="toggle-filter-btn" aria-label="Zwiń/rozwiń panel filtrów">
+            <span id="toggleIcon">◀</span>
+          </button>
+          <div class="filter-content">
+            <h3 class="filter-title">Filtry</h3>
+            
+            <div class="filter-section">
+              <h4 class="filter-section-title">Lata</h4>
+              <div id="yearFilters" class="filter-checkboxes"></div>
+            </div>
+            
+            <div class="filter-section">
+              <h4 class="filter-section-title">Środki transportu</h4>
+              <div id="vehicleFilters" class="filter-checkboxes"></div>
+            </div>
+            
+            <button id="resetFiltersBtn" class="reset-filters-btn">Resetuj filtry</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Map Container -->
+      <div id="map" class="map-container"></div>
+    </div>
 
     <!-- Overlay -->
     <div id="overlay" class="overlay"></div>
