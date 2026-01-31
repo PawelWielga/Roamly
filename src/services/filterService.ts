@@ -63,7 +63,7 @@ export class FilterService {
     this.yearFiltersElement.innerHTML = '';
     years.forEach((year) => {
       const checkbox = this.createCheckbox(`year-${year}`, year, 'year', year);
-      this.yearFiltersElement.appendChild(checkbox);
+      this.yearFiltersElement?.appendChild(checkbox);
     });
 
     // Buduj checkboxy dla typów pojazdów
@@ -72,7 +72,7 @@ export class FilterService {
       const label = this.getVehicleTypeLabel(type);
       const icon = this.getVehicleTypeIcon(type);
       const checkbox = this.createCheckbox(`vehicle-${type}`, `${icon} ${label}`, 'vehicle', type);
-      this.vehicleFiltersElement.appendChild(checkbox);
+      this.vehicleFiltersElement?.appendChild(checkbox);
     });
   }
 
