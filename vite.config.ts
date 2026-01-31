@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
-  base: '/Roamly/docs/',
+  base: '/Roamly/',
   root: '.',
   publicDir: 'public',
   build: {
