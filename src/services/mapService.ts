@@ -91,6 +91,21 @@ export class MapService {
   }
 
   /**
+   * Aktualizuje znaczniki na mapie
+   * @param destinations - Tablica miejsc docelowych do wyświetlenia
+   * @param onClick - Funkcja wywoływana po kliknięciu
+   */
+  updateMarkers(destinations: Destination[], onClick?: (dest: Destination) => void): void {
+    // Usuń wszystkie istniejące znaczniki
+    this.clearMarkers();
+
+    // Dodaj nowe znaczniki
+    destinations.forEach((destination) => {
+      this.addMarker(destination, onClick);
+    });
+  }
+
+  /**
    * Dostosowuje widok mapy do wszystkich miejsc
    * @param destinations - Tablica miejsc docelowych
    * @param options - Opcje zoomu

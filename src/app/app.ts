@@ -3,6 +3,7 @@ import { dataService } from '../services/dataService';
 import { mapService } from '../services/mapService';
 import { animationService } from '../services/animationService';
 import { uiService } from '../services/uiService';
+import { filterService } from '../services/filterService';
 import {
   ROUTE_ZOOM_OPTIONS,
   ALL_DESTINATIONS_ZOOM_OPTIONS,
@@ -31,11 +32,22 @@ export class RoamlyApp {
       // Inicjalizuj serwis UI
       uiService.initialize();
 
+      // Inicjalizuj serwis filtrów
+      filterService.initialize();
+
       // Pokaż wskaźnik ładowania
       uiService.showLoading();
 
       // Załaduj dane
       this.destinations = await dataService.loadDestinations();
+
+      // Ustaw dane w serwisie filtrów
+      filterService.setDestinations(this.destinations);
+
+      // Skonfiguruj callback dla zmiany filtrów
+      filterService.onFilterChange((filteredDestinations) => {
+        this.handleFilterChange(filteredDestinations);
+      });
 
       // Inicjalizuj mapę
       mapService.initializeMap(mapContainerId);
@@ -78,6 +90,22 @@ export class RoamlyApp {
 
     // Obsługa kliknięcia na przycisk zamknięcia
     uiService.onCloseButtonClick(() => this.closeDetails());
+  }
+
+  /**
+   * Obsługuje zmianę filtrów
+   * @param filteredDestinations - Przefiltrowane miejsca docelowe
+   */
+  private handleFilterChange(filteredDestinations: Destination[]): void {
+    // Aktualizuj znaczniki na mapie
+    mapService.updateMarkers(filteredDestinations, (dest) =>
+      this.onMarkerClick(dest)
+    );
+
+    // Dostosuj widok mapy do przefiltrowanych miejsc
+    if (filteredDestinations.length > 0) {
+      mapService.fitToDestinations(filteredDestinations, ALL_DESTINATIONS_ZOOM_OPTIONS);
+    }
   }
 
   /**
@@ -238,6 +266,7 @@ export class RoamlyApp {
     mapService.destroy();
     animationService.reset();
     uiService.reset();
+    filterService.reset();
     this.destinations = [];
     this.isInitialized = false;
   }

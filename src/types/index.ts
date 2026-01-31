@@ -105,3 +105,19 @@ export interface PathOptions {
   lineJoin: 'round' | 'bevel' | 'miter';
   dashArray?: string | null;
 }
+
+/**
+ * Interfejs reprezentujący stan filtrów
+ */
+export interface FilterState {
+  years: string[];
+  vehicleTypes: VehicleType[];
+}
+
+/**
+ * Interfejs reprezentujący opcje filtrów
+ */
+export interface FilterOptions {
+  years: string[];
+  vehicleTypes: VehicleType[];
+}
