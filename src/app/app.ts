@@ -98,9 +98,7 @@ export class RoamlyApp {
    */
   private handleFilterChange(filteredDestinations: Destination[]): void {
     // Aktualizuj znaczniki na mapie
-    mapService.updateMarkers(filteredDestinations, (dest) =>
-      this.onMarkerClick(dest)
-    );
+    mapService.updateMarkers(filteredDestinations, (dest) => this.onMarkerClick(dest));
 
     // Dostosuj widok mapy do przefiltrowanych miejsc
     if (filteredDestinations.length > 0) {

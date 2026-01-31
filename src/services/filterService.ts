@@ -62,12 +62,7 @@ export class FilterService {
     // Buduj checkboxy dla lat
     this.yearFiltersElement.innerHTML = '';
     years.forEach((year) => {
-      const checkbox = this.createCheckbox(
-        `year-${year}`,
-        year,
-        'year',
-        year
-      );
+      const checkbox = this.createCheckbox(`year-${year}`, year, 'year', year);
       this.yearFiltersElement.appendChild(checkbox);
     });
 
@@ -76,12 +71,7 @@ export class FilterService {
     vehicleTypes.forEach((type) => {
       const label = this.getVehicleTypeLabel(type);
       const icon = this.getVehicleTypeIcon(type);
-      const checkbox = this.createCheckbox(
-        `vehicle-${type}`,
-        `${icon} ${label}`,
-        'vehicle',
-        type
-      );
+      const checkbox = this.createCheckbox(`vehicle-${type}`, `${icon} ${label}`, 'vehicle', type);
       this.vehicleFiltersElement.appendChild(checkbox);
     });
   }
@@ -189,17 +179,13 @@ export class FilterService {
       if (checkbox.checked) {
         this.filterState.years.push(value);
       } else {
-        this.filterState.years = this.filterState.years.filter(
-          (y) => y !== value
-        );
+        this.filterState.years = this.filterState.years.filter((y) => y !== value);
       }
     } else if (filterType === 'vehicle') {
       if (checkbox.checked) {
         this.filterState.vehicleTypes.push(value as VehicleType);
       } else {
-        this.filterState.vehicleTypes = this.filterState.vehicleTypes.filter(
-          (t) => t !== value
-        );
+        this.filterState.vehicleTypes = this.filterState.vehicleTypes.filter((t) => t !== value);
       }
     }
 
@@ -210,27 +196,19 @@ export class FilterService {
    * Aplikuje filtry i wywołuje callback
    */
   private applyFilters(): void {
-    const filtered = this.filterDestinations(
-      this.destinations,
-      this.filterState
-    );
+    const filtered = this.filterDestinations(this.destinations, this.filterState);
     this.filterChangeCallback?.(filtered);
   }
 
   /**
    * Filtruje miejsca docelowe (logika AND)
    */
-  private filterDestinations(
-    destinations: Destination[],
-    filters: FilterState
-  ): Destination[] {
+  private filterDestinations(destinations: Destination[], filters: FilterState): Destination[] {
     return destinations.filter((dest) => {
       const yearMatch =
-        filters.years.length === 0 ||
-        filters.years.some((year) => dest.date.includes(year));
+        filters.years.length === 0 || filters.years.some((year) => dest.date.includes(year));
       const vehicleMatch =
-        filters.vehicleTypes.length === 0 ||
-        filters.vehicleTypes.includes(dest.type);
+        filters.vehicleTypes.length === 0 || filters.vehicleTypes.includes(dest.type);
       return yearMatch && vehicleMatch;
     });
   }
