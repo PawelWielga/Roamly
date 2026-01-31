@@ -79,6 +79,13 @@ export class MapService {
 
     const marker = L.marker(destination.coords, { icon }).addTo(this.map);
 
+    marker.bindTooltip(destination.name, {
+      direction: 'top',
+      offset: [0, -18],
+      opacity: 0.95,
+      className: 'destination-tooltip',
+    });
+
     if (onClick) {
       marker.on('click', () => onClick(destination));
     }
@@ -186,6 +193,8 @@ export class MapService {
       throw new Error('Mapa nie jest zainicjalizowana');
     }
 
+    this.removePath();
+
     const path = L.polyline([], {
       color,
       weight: 3,
@@ -194,6 +203,7 @@ export class MapService {
       dashArray: dashArray || undefined,
     }).addTo(this.map);
 
+    this.currentPath = path;
     return path;
   }
 

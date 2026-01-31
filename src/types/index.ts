@@ -55,6 +55,7 @@ export interface MapConfig {
   center: [number, number];
   zoom: number;
   minZoom: number;
+  zoomControl?: boolean;
   markerZoomAnimation: boolean;
 }
 

@@ -7,6 +7,7 @@ export const DEFAULT_MAP_CONFIG: MapConfig = {
   center: [52, 19],
   zoom: 5,
   minZoom: 2,
+  zoomControl: false,
   markerZoomAnimation: false,
 };
 

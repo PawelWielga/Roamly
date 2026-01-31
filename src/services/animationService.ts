@@ -1,6 +1,6 @@
 import { Destination, VehicleType } from '../types/index';
 import { DEFAULT_ANIMATION_CONFIG } from '../constants/mapConfig';
-import { getVehicleSvg, getVehicleColor, getVehicleDashArray } from '../constants/vehicleIcons';
+import { getVehicleSvg, getVehicleColor } from '../constants/vehicleIcons';
 import { mapService } from './mapService';
 
 /**
@@ -104,8 +104,7 @@ export class AnimationService {
 
     // Utwórz linię trasy
     const color = getVehicleColor(destination.type);
-    const dashArray = getVehicleDashArray(destination.type);
-    mapService.createPath(color, dashArray);
+    mapService.createPath(color);
 
     // Utwórz znacznik pojazdu
     const iconHtml = getVehicleSvg(destination.type);

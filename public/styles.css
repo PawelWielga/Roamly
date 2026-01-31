@@ -66,6 +66,25 @@ body {
   flex: 1;
   height: 100%;
   background: var(--bg-offwhite);
+  position: relative;
+}
+
+.map-container::after {
+  content: "Roamly";
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  z-index: 800;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(30, 30, 30, 0.35);
+  background: rgba(246, 247, 245, 0.75);
+  border: 1px solid rgba(236, 233, 227, 0.8);
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  pointer-events: none;
 }
 
 /* Floating Island */
@@ -139,6 +158,35 @@ body {
 .leaflet-marker-icon.destination-marker-wrapper {
   background: transparent;
   border: none;
+}
+
+/* Destination tooltip */
+.leaflet-tooltip.destination-tooltip {
+  background: rgba(246, 247, 245, 0.96);
+  border: 1px solid var(--glass-border);
+  color: var(--text-900);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.55rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.18);
+  pointer-events: none;
+}
+
+.leaflet-tooltip.destination-tooltip.leaflet-tooltip-top:before {
+  border-top-color: rgba(246, 247, 245, 0.96);
+}
+
+.leaflet-tooltip.destination-tooltip.leaflet-tooltip-bottom:before {
+  border-bottom-color: rgba(246, 247, 245, 0.96);
+}
+
+.leaflet-tooltip.destination-tooltip.leaflet-tooltip-left:before {
+  border-left-color: rgba(246, 247, 245, 0.96);
+}
+
+.leaflet-tooltip.destination-tooltip.leaflet-tooltip-right:before {
+  border-right-color: rgba(246, 247, 245, 0.96);
 }
 
 @keyframes markerPulse {
@@ -293,6 +341,7 @@ body {
   left: var(--panel-offset);
   width: var(--panel-width);
   height: calc(100% - 40px);
+  max-height: calc(100% - 40px);
   padding: 1.5rem;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -301,14 +350,14 @@ body {
   box-shadow: var(--panel-shadow);
   overflow-y: auto;
   z-index: 1100;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: max-height 0.35s ease, padding 0.35s ease;
   font-family: "Outfit", "Inter", sans-serif;
 }
 
 .filter-panel.collapsed {
-  transform: translateX(calc(-1 * (var(--panel-width) + 32px)));
-  opacity: 0;
-  pointer-events: none;
+  max-height: 84px;
+  overflow: hidden;
+  padding-bottom: 0.75rem;
 }
 
 .toggle-filter-btn {
@@ -335,7 +384,7 @@ body {
 }
 
 .filter-panel.collapsed ~ .toggle-filter-btn {
-  left: var(--panel-offset);
+  left: calc(var(--panel-offset) + var(--panel-width) - 10px);
 }
 
 .toggle-filter-btn:hover {
@@ -353,6 +402,17 @@ body {
   font-weight: 600;
   color: var(--text-900);
   margin: 0 0 1rem 0;
+}
+
+.filter-content {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  transform-origin: top;
+}
+
+.filter-panel.collapsed .filter-content {
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
 }
 
 .filter-section-title {
@@ -565,10 +625,11 @@ body {
 
   .filter-panel {
     height: calc(100% - 24px);
+    max-height: calc(100% - 24px);
   }
 
   .filter-panel.collapsed {
-    transform: translateX(calc(-1 * (var(--panel-width) + 24px)));
+    max-height: 80px;
   }
 
   .toggle-filter-btn {
@@ -577,7 +638,7 @@ body {
   }
 
   .filter-panel.collapsed ~ .toggle-filter-btn {
-    left: var(--panel-offset);
+    left: calc(var(--panel-offset) + var(--panel-width) - 10px);
   }
 
   .floating-island {
