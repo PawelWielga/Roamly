@@ -23,7 +23,7 @@ export const DEFAULT_ANIMATION_CONFIG: AnimationConfig = {
  * URL warstwy kafelków mapy
  */
 export const TILE_LAYER_URL =
-  'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png';
+  'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png';
 
 /**
  * Tekst atrybucji mapy
