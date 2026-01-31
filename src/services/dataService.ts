@@ -12,7 +12,7 @@ export class DataService {
    * @param url - URL do pliku JSON
    * @returns Promise z tablicą miejsc docelowych
    */
-  async loadDestinations(url: string = '/src/data/destinations.json'): Promise<Destination[]> {
+  async loadDestinations(url: string = '/destinations.json'): Promise<Destination[]> {
     try {
       const response = await fetch(url);
       if (!response.ok) {
