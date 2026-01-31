@@ -31,29 +31,22 @@
 
     <!-- Content -->
     <div class="app-content">
-      <!-- Side Menu -->
-      <aside class="side-menu">
-        <div id="filterPanel" class="filter-panel">
-          <button id="toggleFilterBtn" class="toggle-filter-btn" aria-label="Zwiń/rozwiń panel filtrów">
-            <span id="toggleIcon">◀</span>
-          </button>
-          <div class="filter-content">
-            <h3 class="filter-title">Filtry</h3>
-            
-            <div class="filter-section">
-              <h4 class="filter-section-title">Lata</h4>
-              <div id="yearFilters" class="filter-checkboxes"></div>
-            </div>
-            
-            <div class="filter-section">
-              <h4 class="filter-section-title">Środki transportu</h4>
-              <div id="vehicleFilters" class="filter-checkboxes"></div>
-            </div>
-            
-            <button id="resetFiltersBtn" class="reset-filters-btn">Resetuj filtry</button>
-          </div>
-        </div>
+      <!-- Side Panel -->
+      <aside id="filterPanel" class="filter-panel">
+        <h3 class="filter-title">Filtry</h3>
+
+        <h4 class="filter-section-title">Lata</h4>
+        <div id="yearFilters" class="filter-checkboxes"></div>
+
+        <h4 class="filter-section-title">Środki transportu</h4>
+        <div id="vehicleFilters" class="filter-checkboxes"></div>
+
+        <button id="resetFiltersBtn" class="reset-filters-btn">Resetuj filtry</button>
       </aside>
+
+      <button id="toggleFilterBtn" class="toggle-filter-btn" aria-label="Zwiń/rozwiń panel">
+        <span id="toggleIcon">◀</span>
+      </button>
 
       <!-- Map Container -->
       <div id="map" class="map-container"></div>
