@@ -269,8 +269,75 @@ body {
   background-size: cover;
   background-position: center;
   background-color: var(--bg-mist);
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
+.dest-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.28));
+  transition: opacity 0.2s ease;
+}
+
+.dest-image-play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.dest-image-play-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: rgba(246, 247, 245, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.22);
+  display: grid;
+  place-items: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.dest-image-play-icon::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 14px solid rgba(30, 30, 30, 0.8);
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  margin-left: 4px;
+}
+
+.dest-image--video {
+  cursor: pointer;
+}
+
+.dest-image--video::before {
+  opacity: 1;
+}
+
+.dest-image--video .dest-image-play {
+  opacity: 1;
+}
+
+.dest-image--video:hover .dest-image-play-icon {
+  transform: scale(1.06);
+  background: rgba(246, 247, 245, 0.5);
+}
+
+.dest-image--video:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: -2px;
+}
 /* Details content */
 .details-content {
   padding: 1.5rem;
@@ -710,3 +777,4 @@ body {
     border: 2px solid #000;
   }
 }
+

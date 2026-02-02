@@ -21,8 +21,10 @@ export interface Destination {
   date: string;
   /** Opis miejsca */
   description: string;
-  /** URL obrazka miejsca */
-  imageUrl: string;
+  /** URL obrazka miejsca (opcjonalny, nadpisuje miniaturke z YouTube) */
+  imageUrl?: string;
+  /** URL filmu na YouTube (opcjonalny) */
+  videoUrl?: string;
 }
 
 /**
@@ -122,3 +124,4 @@ export interface FilterOptions {
   years: string[];
   vehicleTypes: VehicleType[];
 }
+

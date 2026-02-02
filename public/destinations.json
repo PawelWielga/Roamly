@@ -8,7 +8,8 @@
       "coords": [35.8989, 14.5146],
       "date": "Sierpień 2023",
       "description": "Słoneczna wyspa pełna historii.",
-      "imageUrl": "https://images.unsplash.com/photo-1516471841702-81e39a0ff39a?auto=format&fit=crop&w=600"
+      "imageUrl": "https://images.unsplash.com/photo-1516471841702-81e39a0ff39a?auto=format&fit=crop&w=600",
+      "videoUrl": ""
     },
     {
       "id": 2,
@@ -18,7 +19,8 @@
       "coords": [47.4979, 19.0402],
       "date": "Grudzień 2023",
       "description": "Perła Dunaju i piękne termy.",
-      "imageUrl": "https://images.unsplash.com/photo-1517713982677-4b66332f98de?auto=format&fit=crop&w=600"
+      "imageUrl": "https://images.unsplash.com/photo-1517713982677-4b66332f98de?auto=format&fit=crop&w=600",
+      "videoUrl": ""
     },
     {
       "id": 3,
@@ -28,7 +30,8 @@
       "coords": [34.772, 32.4297],
       "date": "Maj 2024",
       "description": "Kolebka Afrodyty.",
-      "imageUrl": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600"
+      "imageUrl": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600",
+      "videoUrl": ""
     },
     {
       "id": 4,
@@ -38,7 +41,8 @@
       "coords": [38.3452, -0.481],
       "date": "Lipiec 2024",
       "description": "Słońce na Costa Blanca.",
-      "imageUrl": "https://images.unsplash.com/photo-1560942485-b2a11cc13456?auto=format&fit=crop&w=600"
+      "imageUrl": "https://images.unsplash.com/photo-1560942485-b2a11cc13456?auto=format&fit=crop&w=600",
+      "videoUrl": ""
     },
     {
       "id": 5,
@@ -48,7 +52,8 @@
       "coords": [50.0647, 19.945],
       "date": "Październik 2024",
       "description": "Podróż pociągiem PKP Intercity na południe Polski.",
-      "imageUrl": "https://images.unsplash.com/photo-1512470876302-972fad2aa9dd?auto=format&fit=crop&w=600"
+      "imageUrl": "https://images.unsplash.com/photo-1512470876302-972fad2aa9dd?auto=format&fit=crop&w=600",
+      "videoUrl": ""
     },
     {
       "id": 6,
@@ -58,7 +63,19 @@
       "coords": [54.352, 18.6466],
       "date": "Listopad 2024",
       "description": "Szybki wypad samochodem nad morze siódemką.",
-      "imageUrl": "https://images.unsplash.com/photo-1565039230199-bf93332d7335?auto=format&fit=crop&w=600"
+      "imageUrl": "https://images.unsplash.com/photo-1565039230199-bf93332d7335?auto=format&fit=crop&w=600",
+      "videoUrl": ""
+    },
+    {
+      "id": 7,
+      "type": "plane",
+      "start": [51.3889, 21.2117],
+      "name": "Larnaka, Cypr",
+      "coords": [34.9003, 33.6232],
+      "date": "24-27.01.2026",
+      "description": "Brak",
+      "imageUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=yuuFSz5KfAc"
     }
   ]
 }

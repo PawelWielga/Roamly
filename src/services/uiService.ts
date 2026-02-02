@@ -8,7 +8,7 @@ export class UIService {
   private statusElement: HTMLElement | null = null;
   private overlayElement: HTMLElement | null = null;
   private detailsCardElement: HTMLElement | null = null;
-  private destImageElement: HTMLElement | null = null;
+  private destImageElement: HTMLAnchorElement | null = null;
   private destTitleElement: HTMLElement | null = null;
   private destDateElement: HTMLElement | null = null;
   private destDescElement: HTMLElement | null = null;
@@ -20,7 +20,7 @@ export class UIService {
     this.statusElement = document.getElementById('statusText');
     this.overlayElement = document.getElementById('overlay');
     this.detailsCardElement = document.getElementById('detailsCard');
-    this.destImageElement = document.getElementById('destImage');
+    this.destImageElement = document.getElementById('destImage') as HTMLAnchorElement | null;
     this.destTitleElement = document.getElementById('destTitle');
     this.destDateElement = document.getElementById('destDate');
     this.destDescElement = document.getElementById('destDesc');
@@ -86,10 +86,91 @@ export class UIService {
     this.destTitleElement.textContent = destination.name;
     this.destDateElement.textContent = destination.date;
     this.destDescElement.textContent = destination.description;
-    this.destImageElement.style.backgroundImage = `url(${destination.imageUrl})`;
+    const videoUrl = destination.videoUrl?.trim();
+    const imageUrl = destination.imageUrl?.trim();
+    const thumbnailUrl = videoUrl ? this.getYouTubeThumbnailUrl(videoUrl) : null;
+    const backgroundUrl = imageUrl || thumbnailUrl;
+
+    if (backgroundUrl) {
+      this.destImageElement.style.backgroundImage = `url(${backgroundUrl})`;
+    } else {
+      this.destImageElement.style.backgroundImage = 'none';
+    }
+
+    const hasVideo = Boolean(videoUrl);
+    this.destImageElement.classList.toggle('dest-image--video', hasVideo);
+
+    if (hasVideo && videoUrl) {
+      this.destImageElement.href = videoUrl;
+      this.destImageElement.target = '_blank';
+      this.destImageElement.rel = 'noopener noreferrer';
+      this.destImageElement.setAttribute(
+        'aria-label',
+        `Otworz film na YouTube: ${destination.name}`
+      );
+      this.destImageElement.removeAttribute('aria-disabled');
+      this.destImageElement.removeAttribute('tabindex');
+    } else {
+      this.destImageElement.removeAttribute('href');
+      this.destImageElement.removeAttribute('target');
+      this.destImageElement.removeAttribute('rel');
+      this.destImageElement.setAttribute('aria-label', `Zdjecie miejsca: ${destination.name}`);
+      this.destImageElement.setAttribute('aria-disabled', 'true');
+      this.destImageElement.setAttribute('tabindex', '-1');
+    }
 
     this.showOverlay();
     this.showDetailsCard();
+  }
+
+  /**
+   * Buduje URL miniaturki YouTube dla podanego linku
+   * @param videoUrl - Link do filmu
+   * @returns URL miniaturki lub null
+   */
+  private getYouTubeThumbnailUrl(videoUrl: string): string | null {
+    const videoId = this.extractYouTubeVideoId(videoUrl);
+    if (!videoId) {
+      return null;
+    }
+
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+  }
+
+  /**
+   * Wydobywa ID filmu z URL YouTube
+   * @param videoUrl - Link do filmu
+   * @returns ID filmu lub null
+   */
+  private extractYouTubeVideoId(videoUrl: string): string | null {
+    try {
+      const url = new URL(videoUrl);
+      const hostname = url.hostname.replace('www.', '').toLowerCase();
+
+      if (hostname === 'youtu.be') {
+        const id = url.pathname.split('/').filter(Boolean)[0];
+        return id ?? null;
+      }
+
+      if (hostname.endsWith('youtube.com') || hostname === 'youtube-nocookie.com') {
+        const vParam = url.searchParams.get('v');
+        if (vParam) {
+          return vParam;
+        }
+
+        const pathParts = url.pathname.split('/').filter(Boolean);
+        const section = pathParts[0];
+        const id = pathParts[1];
+
+        if (section === 'embed' || section === 'shorts' || section === 'live') {
+          return id ?? null;
+        }
+      }
+    } catch (error) {
+      return null;
+    }
+
+    return null;
   }
 
   /**
@@ -191,3 +272,10 @@ export class UIService {
  * Singleton instancja serwisu UI
  */
 export const uiService = new UIService();
+
+
+
+
+
+
+
