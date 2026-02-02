@@ -8,10 +8,14 @@ export class UIService {
   private statusElement: HTMLElement | null = null;
   private overlayElement: HTMLElement | null = null;
   private detailsCardElement: HTMLElement | null = null;
-  private destImageElement: HTMLAnchorElement | null = null;
+  private destImageElement: HTMLElement | null = null;
   private destTitleElement: HTMLElement | null = null;
   private destDateElement: HTMLElement | null = null;
   private destDescElement: HTMLElement | null = null;
+  private videoModalElement: HTMLElement | null = null;
+  private videoFrameElement: HTMLIFrameElement | null = null;
+  private videoModalTitleElement: HTMLElement | null = null;
+  private currentVideoUrl: string | null = null;
 
   /**
    * Inicjalizuje serwis UI
@@ -20,10 +24,50 @@ export class UIService {
     this.statusElement = document.getElementById('statusText');
     this.overlayElement = document.getElementById('overlay');
     this.detailsCardElement = document.getElementById('detailsCard');
-    this.destImageElement = document.getElementById('destImage') as HTMLAnchorElement | null;
+    this.destImageElement = document.getElementById('destImage');
     this.destTitleElement = document.getElementById('destTitle');
     this.destDateElement = document.getElementById('destDate');
     this.destDescElement = document.getElementById('destDesc');
+    this.videoModalElement = document.getElementById('videoModal');
+    this.videoFrameElement = document.getElementById('videoFrame') as HTMLIFrameElement | null;
+    this.videoModalTitleElement = document.getElementById('videoModalTitle');
+
+    // Setup video modal event listeners
+    this.setupVideoModalListeners();
+  }
+
+  /**
+   * Konfiguruje nasłuchiwacze zdarzeń dla modala wideo
+   */
+  private setupVideoModalListeners(): void {
+    // Close button click
+    const closeButton = document.getElementById('closeVideoModal');
+    if (closeButton) {
+      closeButton.addEventListener('click', () => this.hideVideoModal());
+    }
+
+    // Backdrop click
+    const backdrop = document.querySelector('.video-modal-backdrop');
+    if (backdrop) {
+      backdrop.addEventListener('click', () => this.hideVideoModal());
+    }
+
+    // Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.isVideoModalVisible()) {
+        this.hideVideoModal();
+      }
+    });
+
+    // Image click for video
+    if (this.destImageElement) {
+      this.destImageElement.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (this.currentVideoUrl) {
+          this.showVideoModal(this.currentVideoUrl);
+        }
+      });
+    }
   }
 
   /**
@@ -100,23 +144,28 @@ export class UIService {
     const hasVideo = Boolean(videoUrl);
     this.destImageElement.classList.toggle('dest-image--video', hasVideo);
 
+    // Store video URL for modal playback
+    this.currentVideoUrl = hasVideo ? videoUrl : null;
+
     if (hasVideo && videoUrl) {
-      this.destImageElement.href = videoUrl;
-      this.destImageElement.target = '_blank';
-      this.destImageElement.rel = 'noopener noreferrer';
+      this.destImageElement.removeAttribute('href');
+      this.destImageElement.removeAttribute('target');
+      this.destImageElement.removeAttribute('rel');
       this.destImageElement.setAttribute(
         'aria-label',
-        `Otworz film na YouTube: ${destination.name}`
+        `Otwórz film: ${destination.name}`
       );
       this.destImageElement.removeAttribute('aria-disabled');
       this.destImageElement.removeAttribute('tabindex');
+      this.destImageElement.style.cursor = 'pointer';
     } else {
       this.destImageElement.removeAttribute('href');
       this.destImageElement.removeAttribute('target');
       this.destImageElement.removeAttribute('rel');
-      this.destImageElement.setAttribute('aria-label', `Zdjecie miejsca: ${destination.name}`);
+      this.destImageElement.setAttribute('aria-label', `Zdjęcie miejsca: ${destination.name}`);
       this.destImageElement.setAttribute('aria-disabled', 'true');
       this.destImageElement.setAttribute('tabindex', '-1');
+      this.destImageElement.style.cursor = 'default';
     }
 
     this.showOverlay();
@@ -260,9 +309,62 @@ export class UIService {
   }
 
   /**
+   * Pokazuje modal wideo
+   * @param videoUrl - URL filmu YouTube
+   */
+  showVideoModal(videoUrl: string): void {
+    if (!this.videoModalElement || !this.videoFrameElement) {
+      console.error('Elementy modala wideo nie są zainicjalizowane');
+      return;
+    }
+
+    // Convert to embed URL
+    const embedUrl = this.convertToEmbedUrl(videoUrl);
+    if (embedUrl) {
+      this.videoFrameElement.src = embedUrl;
+    }
+
+    this.videoModalElement.classList.add('active');
+  }
+
+  /**
+   * Ukrywa modal wideo
+   */
+  hideVideoModal(): void {
+    if (!this.videoModalElement || !this.videoFrameElement) {
+      return;
+    }
+
+    this.videoModalElement.classList.remove('active');
+    this.videoFrameElement.src = '';
+  }
+
+  /**
+   * Sprawdza czy modal wideo jest widoczny
+   * @returns True jeśli modal jest widoczny
+   */
+  isVideoModalVisible(): boolean {
+    return this.videoModalElement?.classList.contains('active') ?? false;
+  }
+
+  /**
+   * Konwertuje URL YouTube na URL embed
+   * @param videoUrl - URL filmu YouTube
+   * @returns URL embed lub null
+   */
+  private convertToEmbedUrl(videoUrl: string): string | null {
+    const videoId = this.extractYouTubeVideoId(videoUrl);
+    if (!videoId) {
+      return null;
+    }
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  }
+
+  /**
    * Resetuje stan UI
    */
   reset(): void {
+    this.hideVideoModal();
     this.hideDetails();
     this.setDefaultStatus();
   }

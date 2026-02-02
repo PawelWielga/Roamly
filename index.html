@@ -62,16 +62,34 @@
 
     <!-- Details Card -->
     <div id="detailsCard" class="details-card">
-      <a id="destImage" class="dest-image" href="" target="_blank" rel="noopener noreferrer" aria-label="Otworz film na YouTube">
+      <div id="destImage" class="dest-image" aria-label="Otworz film">
         <span class="dest-image-play" aria-hidden="true">
           <span class="dest-image-play-icon"></span>
         </span>
-      </a>
+      </div>
       <div class="details-content">
         <h2 id="destTitle" class="dest-title"></h2>
         <p id="destDate" class="dest-date"></p>
         <p id="destDesc" class="dest-description"></p>
         <button id="closeButton" class="close-button">Zamknij</button>
+      </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal">
+      <div class="video-modal-backdrop"></div>
+      <div class="video-modal-content">
+        <button id="closeVideoModal" class="video-modal-close" aria-label="Zamknij wideo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="video-modal-video-container">
+          <iframe id="videoFrame" class="video-frame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video-modal-info">
+          <h3 id="videoModalTitle" class="video-modal-title"></h3>
+        </div>
       </div>
     </div>
 
