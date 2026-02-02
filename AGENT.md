@@ -28,9 +28,9 @@ Roamly/
 │   │   └── index.ts           # Typy TypeScript
 │   └── main.ts               # Punkt wejścia
 ├── public/
-│   ├── index.html             # Główny plik HTML
 │   ├── styles.css             # Style CSS
 │   └── destinations.json      # Dane podróży
+├── index.html                 # Główny plik HTML
 ├── plans/                    # Plany implementacji
 └── AGENT.md                  # Ten plik
 ```
@@ -144,7 +144,7 @@ npm run dev      # Uruchomienie serwera deweloperskiego
 npm run build    # Budowanie projektu
 ```
 
-Serwer deweloperski działa na `http://localhost:3000/Roamly/`
+Serwer deweloperski działa na `http://localhost:3000/Roamly/index.html`
 
 ## Testowanie
 

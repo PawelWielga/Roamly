@@ -38,7 +38,6 @@ jobs:
 
       - name: Clean dist directory
         run: |
-          rm -f dist/index.html dist/styles.css
           mv dist/public/* dist/
           rmdir dist/public
 
