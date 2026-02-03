@@ -264,6 +264,8 @@ Przed zatwierdzeniem zmian sprawdź:
 
 - Serwer deweloperski może blokować pliki podczas pracy - zatrzymaj go przed modyfikacją plików
 
+- W workflowach GitHub Actions tymczasowo wylaczono lint, type-check oraz format-check; szczegoly w `plans/ci-checks-removed.md`.
+
 ## Utrzymanie AGENTS.md
 
 - Jesli ten plik zostal odczytany i do kodu dodajesz cos nowego (funkcjonalnosc, konfiguracje, nowe pliki lub zaleznosci), masz obowiazek zaktualizowac ten opis, aby pozostawal zgodny z aktualnym stanem projektu.
