@@ -1,4 +1,4 @@
-# Instrukcje dla Agenta Kilo Code
+# Instrukcje dla Agentów AI
 
 ## Informacje o projekcie
 
@@ -266,6 +266,6 @@ Przed zatwierdzeniem zmian sprawdź:
 
 - W workflowach GitHub Actions tymczasowo wylaczono lint, type-check oraz format-check; szczegoly w `plans/ci-checks-removed.md`.
 
-## Utrzymanie AGENTS.md
+## Utrzymanie AGENT.md
 
 - Jesli ten plik zostal odczytany i do kodu dodajesz cos nowego (funkcjonalnosc, konfiguracje, nowe pliki lub zaleznosci), masz obowiazek zaktualizowac ten opis, aby pozostawal zgodny z aktualnym stanem projektu.
