@@ -124,4 +124,3 @@ export interface FilterOptions {
   years: string[];
   vehicleTypes: VehicleType[];
 }
-

@@ -14,8 +14,36 @@ export class UIService {
   private destDescElement: HTMLElement | null = null;
   private videoModalElement: HTMLElement | null = null;
   private videoFrameElement: HTMLIFrameElement | null = null;
-  private videoModalTitleElement: HTMLElement | null = null;
   private currentVideoUrl: string | null = null;
+
+  /**
+   * Sprawdza czy aplikacja dzia?a na urz?dzeniu mobilnym
+   * @returns True je?li urz?dzenie jest mobilne
+   */
+  private isMobileDevice(): boolean {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    const canMatchMedia = typeof window.matchMedia === 'function';
+    const hasCoarsePointer = canMatchMedia && window.matchMedia('(pointer: coarse)').matches;
+    const hasNoHover = canMatchMedia && window.matchMedia('(hover: none)').matches;
+    const userAgent = navigator.userAgent ?? '';
+    const isMobileUserAgent = /android|iphone|ipad|ipod|iemobile|opera mini/i.test(userAgent);
+
+    return (hasCoarsePointer && hasNoHover) || isMobileUserAgent;
+  }
+
+  /**
+   * Otwiera film w aplikacji YouTube na urz?dzeniach mobilnych
+   * @param videoUrl - URL filmu YouTube
+   */
+  private openVideoInYouTubeApp(videoUrl: string): void {
+    const videoId = this.extractYouTubeVideoId(videoUrl);
+    const watchUrl = videoId ? `https://www.youtube.com/watch?v=${videoId}` : videoUrl;
+
+    window.location.assign(watchUrl);
+  }
 
   /**
    * Inicjalizuje serwis UI
@@ -30,7 +58,6 @@ export class UIService {
     this.destDescElement = document.getElementById('destDesc');
     this.videoModalElement = document.getElementById('videoModal');
     this.videoFrameElement = document.getElementById('videoFrame') as HTMLIFrameElement | null;
-    this.videoModalTitleElement = document.getElementById('videoModalTitle');
 
     // Setup video modal event listeners
     this.setupVideoModalListeners();
@@ -145,16 +172,13 @@ export class UIService {
     this.destImageElement.classList.toggle('dest-image--video', hasVideo);
 
     // Store video URL for modal playback
-    this.currentVideoUrl = hasVideo ? videoUrl : null;
+    this.currentVideoUrl = videoUrl ?? null;
 
     if (hasVideo && videoUrl) {
       this.destImageElement.removeAttribute('href');
       this.destImageElement.removeAttribute('target');
       this.destImageElement.removeAttribute('rel');
-      this.destImageElement.setAttribute(
-        'aria-label',
-        `Otwórz film: ${destination.name}`
-      );
+      this.destImageElement.setAttribute('aria-label', `Otwórz film: ${destination.name}`);
       this.destImageElement.removeAttribute('aria-disabled');
       this.destImageElement.removeAttribute('tabindex');
       this.destImageElement.style.cursor = 'pointer';
@@ -313,8 +337,13 @@ export class UIService {
    * @param videoUrl - URL filmu YouTube
    */
   showVideoModal(videoUrl: string): void {
+    if (this.isMobileDevice()) {
+      this.openVideoInYouTubeApp(videoUrl);
+      return;
+    }
+
     if (!this.videoModalElement || !this.videoFrameElement) {
-      console.error('Elementy modala wideo nie są zainicjalizowane');
+      console.error('Elementy modala wideo nie s? zainicjalizowane');
       return;
     }
 
@@ -374,10 +403,3 @@ export class UIService {
  * Singleton instancja serwisu UI
  */
 export const uiService = new UIService();
-
-
-
-
-
-
-

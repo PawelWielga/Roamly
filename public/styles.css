@@ -2,25 +2,25 @@
  * Main styles for the Roamly app
  */
 
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
-  --brand-blue: #2C3E50;
-  --brand-blue-dark: #3A6EA5;
-  --success: #4CAF50;
-  --warning: #E5533D;
-  --marker-default: #1F6F8B;
-  --marker-special: #E76F51;
-  --marker-planned: #6B8E6E;
-  --marker-muted: #9AA0A6;
-  --bg-offwhite: #F6F7F5;
-  --bg-sand: #ECE9E3;
-  --bg-mist: #D6D8D5;
-  --text-900: #1E1E1E;
-  --text-700: #5F6368;
-  --text-600: #5F6368;
-  --text-500: #9AA0A6;
-  --text-on-dark: #F2F2F2;
+  --brand-blue: #2c3e50;
+  --brand-blue-dark: #3a6ea5;
+  --success: #4caf50;
+  --warning: #e5533d;
+  --marker-default: #1f6f8b;
+  --marker-special: #e76f51;
+  --marker-planned: #6b8e6e;
+  --marker-muted: #9aa0a6;
+  --bg-offwhite: #f6f7f5;
+  --bg-sand: #ece9e3;
+  --bg-mist: #d6d8d5;
+  --text-900: #1e1e1e;
+  --text-700: #5f6368;
+  --text-600: #5f6368;
+  --text-500: #9aa0a6;
+  --text-on-dark: #f2f2f2;
   --glass-bg: rgba(246, 247, 245, 0.78);
   --glass-border: rgba(236, 233, 227, 0.7);
   --panel-shadow: 0 20px 40px rgba(30, 30, 30, 0.12);
@@ -47,9 +47,10 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
   color: var(--text-900);
-  background: radial-gradient(circle at 15% 0%, rgba(214, 216, 213, 0.45), transparent 45%),
+  background:
+    radial-gradient(circle at 15% 0%, rgba(214, 216, 213, 0.45), transparent 45%),
     linear-gradient(135deg, var(--bg-offwhite) 0%, var(--bg-sand) 50%, var(--bg-offwhite) 100%);
 }
 
@@ -70,7 +71,7 @@ body {
 }
 
 .map-container::after {
-  content: "Roamly";
+  content: 'Roamly';
   position: absolute;
   top: 14px;
   right: 18px;
@@ -276,7 +277,7 @@ body {
 }
 
 .dest-image::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   opacity: 0;
@@ -290,7 +291,9 @@ body {
   display: grid;
   place-items: center;
   opacity: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
   pointer-events: none;
 }
 
@@ -304,11 +307,13 @@ body {
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.22);
   display: grid;
   place-items: center;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
 }
 
 .dest-image-play-icon::before {
-  content: "";
+  content: '';
   width: 0;
   height: 0;
   border-left: 14px solid rgba(30, 30, 30, 0.8);
@@ -417,8 +422,10 @@ body {
   box-shadow: var(--panel-shadow);
   overflow-y: auto;
   z-index: 1100;
-  transition: max-height 0.35s ease, padding 0.35s ease;
-  font-family: "Outfit", "Inter", sans-serif;
+  transition:
+    max-height 0.35s ease,
+    padding 0.35s ease;
+  font-family: 'Outfit', 'Inter', sans-serif;
 }
 
 .filter-panel.collapsed {
@@ -445,7 +452,10 @@ body {
   justify-content: center;
   font-size: 0.875rem;
   color: var(--text-700);
-  transition: left 0.3s ease, background-color 0.2s, color 0.2s;
+  transition:
+    left 0.3s ease,
+    background-color 0.2s,
+    color 0.2s;
   z-index: 1001;
   pointer-events: auto;
 }
@@ -472,7 +482,9 @@ body {
 }
 
 .filter-content {
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
   transform-origin: top;
 }
 
@@ -523,7 +535,7 @@ body {
 }
 
 .filter-checkbox-label::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   top: 50%;
@@ -533,11 +545,14 @@ body {
   background: rgba(214, 216, 213, 0.5);
   border: 1px solid rgba(214, 216, 213, 0.7);
   border-radius: 999px;
-  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .filter-checkbox-label::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 3px;
   top: 50%;
@@ -547,7 +562,9 @@ body {
   border-radius: 50%;
   background: var(--bg-offwhite);
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
-  transition: transform 0.2s, background-color 0.2s;
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
 }
 
 .filter-checkbox-label:hover {
@@ -585,7 +602,10 @@ body {
   font-weight: 500;
   font-size: 0.875rem;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
 }
 
 .reset-filters-btn:hover {
@@ -852,7 +872,10 @@ body {
   align-items: center;
   justify-content: center;
   color: var(--text-700);
-  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    transform 0.2s;
   z-index: 10;
 }
 
@@ -909,4 +932,3 @@ body {
     font-size: 1rem;
   }
 }
-

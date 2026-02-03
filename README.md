@@ -149,16 +149,16 @@ Definicje odwiedzonych miejsc są przechowywane w pliku [`src/data/destinations.
 
 ### Pola
 
-| Pole | Typ | Opis |
-|------|-----|------|
-| `id` | number | Unikalny identyfikator |
-| `type` | string | Typ środka transportu: `plane`, `train`, `car` |
-| `start` | [number, number] | Współrzędne punktu startowego [szerokość, długość] |
-| `name` | string | Nazwa miejsca docelowego |
-| `coords` | [number, number] | Współrzędne miejsca docelowego [szerokość, długość] |
-| `date` | string | Data podróży |
-| `description` | string | Opis miejsca |
-| `imageUrl` | string | URL obrazka miejsca |
+| Pole          | Typ              | Opis                                                |
+| ------------- | ---------------- | --------------------------------------------------- |
+| `id`          | number           | Unikalny identyfikator                              |
+| `type`        | string           | Typ środka transportu: `plane`, `train`, `car`      |
+| `start`       | [number, number] | Współrzędne punktu startowego [szerokość, długość]  |
+| `name`        | string           | Nazwa miejsca docelowego                            |
+| `coords`      | [number, number] | Współrzędne miejsca docelowego [szerokość, długość] |
+| `date`        | string           | Data podróży                                        |
+| `description` | string           | Opis miejsca                                        |
+| `imageUrl`    | string           | URL obrazka miejsca                                 |
 
 ## 🧪 Testowanie
 
@@ -236,6 +236,7 @@ git push origin main
 ```
 
 Workflow automatycznie:
+
 - Zainstaluje zależności
 - Przeprowadzi testy i linting
 - Zbuduje projekt

@@ -75,11 +75,13 @@ Zawiera serwisy odpowiedzialne za konkretne funkcjonalności:
 #### DataService
 
 Odpowiedzialny za:
+
 - Ładowanie danych z pliku JSON
 - Zarządzanie kolekcją miejsc docelowych
 - CRUD operacje na danych
 
 Metody:
+
 - `loadDestinations()` - Ładuje dane
 - `getDestinations()` - Pobiera wszystkie miejsca
 - `getDestinationById()` - Pobiera miejsce po ID
@@ -90,6 +92,7 @@ Metody:
 #### MapService
 
 Odpowiedzialny za:
+
 - Inicjalizację mapy Leaflet
 - Zarządzanie znacznikami
 - Zarządzanie ścieżkami
@@ -97,6 +100,7 @@ Odpowiedzialny za:
 - Zoom i nawigację
 
 Metody:
+
 - `initializeMap()` - Inicjalizuje mapę
 - `addMarker()` - Dodaje znacznik
 - `createPath()` - Tworzy ścieżkę
@@ -109,11 +113,13 @@ Metody:
 #### AnimationService
 
 Odpowiedzialny za:
+
 - Obliczanie ścieżek
 - Animację pojazdów
 - Zarządzanie stanem animacji
 
 Metody:
+
 - `calculatePathPoints()` - Oblicza punkty ścieżki
 - `calculateRotation()` - Oblicza rotację
 - `startAnimation()` - Rozpoczyna animację
@@ -122,11 +128,13 @@ Metody:
 #### UIService
 
 Odpowiedzialny za:
+
 - Zarządzanie elementami UI
 - Aktualizację statusów
 - Pokazywanie/ukrywanie kart szczegółów
 
 Metody:
+
 - `initialize()` - Inicjalizuje serwis
 - `updateStatus()` - Aktualizuje status
 - `showDetails()` - Pokazuje szczegóły
@@ -278,6 +286,7 @@ vi.mock('../services/mapService.js', () => ({
 ### Monitorowanie
 
 Planowane dodanie:
+
 - Google Analytics
 - Sentry dla błędów
 - Performance monitoring

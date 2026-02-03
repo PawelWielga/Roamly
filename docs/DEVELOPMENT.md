@@ -35,11 +35,13 @@ Ten dokument zawiera informacje dla deweloperów chcących rozwijać projekt Roa
 
 ```typescript
 // Dobrze
-const destination = destinations.find(d => d.id === id);
+const destination = destinations.find((d) => d.id === id);
 const name = destination?.name ?? 'Nieznane';
 
 // Źle
-var destination = destinations.find(function(d) { return d.id === id; });
+var destination = destinations.find(function (d) {
+  return d.id === id;
+});
 var name = destination ? destination.name : 'Nieznane';
 ```
 
@@ -156,10 +158,10 @@ npm run test -- --inspect-brk
 Używaj odpowiednich poziomów logowania:
 
 ```typescript
-console.log('Informacja');      // Ogólne informacje
-console.warn('Ostrzeżenie');    // Ostrzeżenia
-console.error('Błąd');          // Błędy
-console.debug('Debug');         // Debug (tylko w dev)
+console.log('Informacja'); // Ogólne informacje
+console.warn('Ostrzeżenie'); // Ostrzeżenia
+console.error('Błąd'); // Błędy
+console.debug('Debug'); // Debug (tylko w dev)
 ```
 
 ## 📦 Dodawanie nowych funkcjonalności

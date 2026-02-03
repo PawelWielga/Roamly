@@ -1,9 +1,11 @@
 # Plan Implementacji Panelu Filtrów Wycieczek
 
 ## Przegląd
+
 Dodanie panelu filtrów po lewej stronie mapy do filtrowania wycieczek po latach i środkach transportu.
 
 ## Wymagania
+
 - ✅ Panel po lewej stronie
 - ✅ Filtrowanie po latach (dynamicznie pobierane z danych)
 - ✅ Filtrowanie po środkach transportu (plane, train, car)
@@ -38,14 +40,14 @@ flowchart LR
         C[Year Checkboxes]
         D[Vehicle Checkboxes]
     end
-    
+
     subgraph Services
         E[filterService]
         F[uiService]
         G[mapService]
         H[dataService]
     end
-    
+
     A --> E
     B --> F
     C --> E
@@ -76,6 +78,7 @@ export interface FilterOptions {
 ### 2. Nowy serwis `src/services/filterService.ts`
 
 Utwórz nowy serwis odpowiedzialny za:
+
 - Inicjalizację panelu filtrów
 - Pobieranie unikalnych lat z danych
 - Filtrowanie wycieczek (logika AND)
@@ -85,6 +88,7 @@ Utwórz nowy serwis odpowiedzialny za:
 ### 3. Aktualizacja `src/services/uiService.ts`
 
 Dodaj metody do zarządzania panelem filtrów:
+
 - `toggleFilterPanel()` - przełączanie widoczności panelu
 - `updateFilterPanel(state)` - aktualizacja stanu checkboxów
 - `getFilterPanelElement()` - pobranie elementu panelu
@@ -92,11 +96,13 @@ Dodaj metody do zarządzania panelem filtrów:
 ### 4. Aktualizacja `src/services/mapService.ts`
 
 Dodaj metodę:
+
 - `updateMarkers(destinations)` - aktualizacja znaczników na mapie po filtrowaniu
 
 ### 5. Aktualizacja `src/app/app.ts`
 
 Zintegruj panel filtrów z główną aplikacją:
+
 - Inicjalizacja filterService
 - Obsługa zdarzeń zmiany filtrów
 - Aktualizacja znaczników po zmianie filtrów
@@ -113,17 +119,17 @@ Dodaj strukturę panelu filtrów:
   </button>
   <div class="filter-content">
     <h3 class="filter-title">Filtry</h3>
-    
+
     <div class="filter-section">
       <h4 class="filter-section-title">Lata</h4>
       <div id="yearFilters" class="filter-checkboxes"></div>
     </div>
-    
+
     <div class="filter-section">
       <h4 class="filter-section-title">Środki transportu</h4>
       <div id="vehicleFilters" class="filter-checkboxes"></div>
     </div>
-    
+
     <button id="resetFiltersBtn" class="reset-filters-btn">Resetuj filtry</button>
   </div>
 </div>
@@ -132,6 +138,7 @@ Dodaj strukturę panelu filtrów:
 ### 7. Style CSS w `public/styles.css`
 
 Dodaj style dla panelu filtrów pasujące do stylistyki strony:
+
 - Kolorystyka: biały (#ffffff), niebieski (#3b82f6), szary (#4b5563)
 - Font: Inter
 - Animacje płynne
@@ -141,12 +148,13 @@ Dodaj style dla panelu filtrów pasujące do stylistyki strony:
 ### 8. Szczegóły implementacji
 
 #### Logika filtrowania AND:
+
 ```typescript
 filterDestinations(destinations: Destination[], filters: FilterState): Destination[] {
   return destinations.filter(dest => {
-    const yearMatch = filters.years.length === 0 || 
+    const yearMatch = filters.years.length === 0 ||
                       filters.years.some(year => dest.date.includes(year));
-    const vehicleMatch = filters.vehicleTypes.length === 0 || 
+    const vehicleMatch = filters.vehicleTypes.length === 0 ||
                          filters.vehicleTypes.includes(dest.type);
     return yearMatch && vehicleMatch;
   });
@@ -154,6 +162,7 @@ filterDestinations(destinations: Destination[], filters: FilterState): Destinati
 ```
 
 #### Dynamiczne pobieranie lat:
+
 ```typescript
 extractYears(destinations: Destination[]): string[] {
   const years = destinations.map(dest => {
@@ -165,6 +174,7 @@ extractYears(destinations: Destination[]): string[] {
 ```
 
 #### Ikony środków transportu:
+
 - ✈️ Plane (samolot)
 - 🚆 Train (pociąg)
 - 🚗 Car (samochód)
@@ -184,6 +194,7 @@ extractYears(destinations: Destination[]): string[] {
 ## Testowanie
 
 Po implementacji sprawdzić:
+
 - ✅ Panel wyświetla się poprawnie po lewej stronie
 - ✅ Lata są dynamicznie pobierane z danych
 - ✅ Checkboxy działają poprawnie

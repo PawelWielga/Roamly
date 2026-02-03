@@ -3,6 +3,7 @@
 ## Informacje o projekcie
 
 Projekt **Roamly** to interaktywna mapa podróży z animacjami pojazdów, zbudowana przy użyciu:
+
 - **TypeScript** - język programowania
 - **Vite** - narzędzie do budowania aplikacji
 - **Leaflet** - biblioteka do map
@@ -38,17 +39,21 @@ Roamly/
 ## Ważne zasady
 
 ### Końce linii
+
 **KRYTYCZNE:** Wszystkie pliki muszą używać końców linii **CRLF** (Windows), a nie LF (Unix).
+
 - Używaj `write_to_file` lub `edit_file` z poprawnymi końcami linii
 - Unikaj używania poleceń PowerShell do konwersji końców linii podczas pracy
 
 ### Styl kodu
+
 - Używaj TypeScript z typowaniem
 - Komentarze JSDoc dla wszystkich publicznych metod
 - Singleton pattern dla serwisów (export const serviceName = new ServiceClass())
 - Nazewnictwo: camelCase dla zmiennych/metod, PascalCase dla klas
 
 ### Kolory i stylistyka
+
 - Kolor główny: `#3b82f6` (niebieski)
 - Kolor ciemniejszy: `#2563eb`
 - Kolor tła: `#ffffff` (biały)
@@ -59,10 +64,13 @@ Roamly/
 ## Serwisy
 
 ### dataService.ts
+
 Odpowiedzialny za ładowanie i zarządzanie danymi podróży z pliku `destinations.json`.
 
 ### mapService.ts
+
 Odpowiedzialny za zarządzanie mapą Leaflet:
+
 - `initializeMap()` - inicjalizacja mapy
 - `addMarker()` - dodawanie znaczników
 - `updateMarkers()` - aktualizacja znaczników (nowa metoda)
@@ -70,38 +78,45 @@ Odpowiedzialny za zarządzanie mapą Leaflet:
 - `clearMarkers()` - usuwanie wszystkich znaczników
 
 ### uiService.ts
+
 Odpowiedzialny za zarządzanie interfejsem użytkownika:
+
 - `showDetails()` - pokazywanie karty szczegółów
 - `hideDetails()` - ukrywanie karty szczegółów
 - `updateStatus()` - aktualizacja tekstu statusu
 
 ### filterService.ts (nowy)
+
 Odpowiedzialny za zarządzanie panelem filtrów:
+
 - `initialize()` - inicjalizacja serwisu
 - `setDestinations()` - ustawienie danych i budowanie panelu
 - `onFilterChange()` - callback dla zmiany filtrów
 - `reset()` - resetowanie stanu
 
 ### animationService.ts
+
 Odpowiedzialny za animację pojazdów na trasie.
 
 ## Typy danych
 
 ### Destination
+
 ```typescript
 interface Destination {
   id: number;
-  type: VehicleType;        // 'plane' | 'train' | 'car'
-  start: [number, number];  // [szerokość, długość]
+  type: VehicleType; // 'plane' | 'train' | 'car'
+  start: [number, number]; // [szerokość, długość]
   name: string;
   coords: [number, number]; // [szerokość, długość]
-  date: string;            // np. "Sierpień 2023"
+  date: string; // np. "Sierpień 2023"
   description: string;
   imageUrl: string;
 }
 ```
 
 ### FilterState
+
 ```typescript
 interface FilterState {
   years: string[];
@@ -112,12 +127,14 @@ interface FilterState {
 ## Panel filtrów
 
 Panel filtrów znajduje się po lewej stronie mapy i pozwala na:
+
 - Filtrowanie po latach (dynamicznie pobierane z danych)
 - Filtrowanie po środkach transportu (plane, train, car)
 - Zwijanie/rozwijanie panelu
 - Resetowanie filtrów
 
 ### Elementy HTML
+
 - `#filterPanel` - główny kontener panelu
 - `#toggleFilterBtn` - przycisk zwijania/rozwijania
 - `#toggleIcon` - ikona przycisku (◀/▶)
@@ -126,6 +143,7 @@ Panel filtrów znajduje się po lewej stronie mapy i pozwala na:
 - `#resetFiltersBtn` - przycisk resetowania
 
 ### Klasy CSS
+
 - `.filter-panel` - główny panel
 - `.filter-panel.collapsed` - panel zwinięty
 - `.toggle-filter-btn` - przycisk zwijania
@@ -149,6 +167,7 @@ Serwer deweloperski działa na `http://localhost:3000/Roamly/index.html`
 ## Testowanie
 
 Przed zatwierdzeniem zmian sprawdź:
+
 - Panel filtrów wyświetla się poprawnie po lewej stronie
 - Lata są dynamicznie pobierane z danych
 - Checkboxy działają poprawnie
