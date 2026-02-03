@@ -68,7 +68,7 @@ Roamly/
 
 **KRYTYCZNE:** Wszystkie pliki muszą używać końców linii **CRLF** (Windows), a nie LF (Unix).
 
-- Używaj `write_to_file` lub `edit_file` z poprawnymi końcami linii
+- Ustaw edytor na CRLF i utrzymuj spójne końce linii
 
 - Unikaj używania poleceń PowerShell do konwersji końców linii podczas pracy
 
@@ -234,7 +234,7 @@ npm run build    # Budowanie projektu
 
 ```
 
-Serwer deweloperski działa na `http://localhost:3000/Roamly/index.html`
+Serwer deweloperski działa na `http://localhost:3000/Roamly/`
 
 ## Testowanie
 
@@ -264,7 +264,7 @@ Przed zatwierdzeniem zmian sprawdź:
 
 - Serwer deweloperski może blokować pliki podczas pracy - zatrzymaj go przed modyfikacją plików
 
-- W workflowach GitHub Actions tymczasowo wylaczono lint, type-check oraz format-check; szczegoly w `plans/ci-checks-removed.md`.
+- W workflowach GitHub Actions lint, type-check oraz format-check są tymczasowo wyłączone (zastąpione krokami no-op); szczegóły w `plans/ci-checks-removed.md`.
 
 ## Utrzymanie AGENT.md
 
