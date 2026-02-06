@@ -266,6 +266,11 @@ Przed zatwierdzeniem zmian sprawdź:
 
 - W workflowach GitHub Actions lint, type-check oraz format-check są tymczasowo wyłączone (zastąpione krokami no-op); szczegóły w `plans/ci-checks-removed.md`.
 
+## GitHub Pages i domena
+
+- Plik `public/CNAME` zawiera domenę niestandardową dla GitHub Pages i jest kopiowany do `dist` podczas builda.
+- Workflow deploy ustawia `cname: wycieczki.dihor.pl` jako dodatkowe zabezpieczenie.
+
 ## Utrzymanie AGENT.md
 
 - Jesli ten plik zostal odczytany i do kodu dodajesz cos nowego (funkcjonalnosc, konfiguracje, nowe pliki lub zaleznosci), masz obowiazek zaktualizowac ten opis, aby pozostawal zgodny z aktualnym stanem projektu.
