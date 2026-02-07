@@ -1,4 +1,4 @@
-import { Destination } from '../types/index';
+﻿import { Destination } from '../types/index';
 import { dataService } from '../services/dataService';
 import { mapService } from '../services/mapService';
 import { animationService } from '../services/animationService';
@@ -11,20 +11,21 @@ import {
 } from '../constants/mapConfig';
 
 /**
- * Główna klasa aplikacji Roamly
- * Koordynuje wszystkie serwisy i zarządza przepływem aplikacji
+ * GĹ‚Ăłwna klasa aplikacji Roamly
+ * Koordynuje wszystkie serwisy i zarzÄ…dza przepĹ‚ywem aplikacji
  */
 export class RoamlyApp {
   private destinations: Destination[] = [];
+  private filteredDestinations: Destination[] = [];
   private isInitialized = false;
 
   /**
-   * Inicjalizuje aplikację
+   * Inicjalizuje aplikacjÄ™
    * @param mapContainerId - ID kontenera mapy
    */
   async initialize(mapContainerId: string = 'map'): Promise<void> {
     if (this.isInitialized) {
-      console.warn('Aplikacja jest już zainicjalizowana');
+      console.warn('Aplikacja jest juĹĽ zainicjalizowana');
       return;
     }
 
@@ -32,24 +33,25 @@ export class RoamlyApp {
       // Inicjalizuj serwis UI
       uiService.initialize();
 
-      // Inicjalizuj serwis filtrów
+      // Inicjalizuj serwis filtrĂłw
       filterService.initialize();
 
-      // Pokaż wskaźnik ładowania
+      // PokaĹĽ wskaĹşnik Ĺ‚adowania
       uiService.showLoading();
 
-      // Załaduj dane
+      // ZaĹ‚aduj dane
       this.destinations = await dataService.loadDestinations();
+      this.filteredDestinations = [...this.destinations];
 
-      // Ustaw dane w serwisie filtrów
+      // Ustaw dane w serwisie filtrĂłw
       filterService.setDestinations(this.destinations);
 
-      // Skonfiguruj callback dla zmiany filtrów
+      // Skonfiguruj callback dla zmiany filtrĂłw
       filterService.onFilterChange((filteredDestinations) => {
         this.handleFilterChange(filteredDestinations);
       });
 
-      // Inicjalizuj mapę
+      // Inicjalizuj mapÄ™
       mapService.initializeMap(mapContainerId);
 
       // Dodaj znaczniki dla wszystkich miejsc
@@ -58,17 +60,17 @@ export class RoamlyApp {
       // Dostosuj widok mapy do wszystkich miejsc
       mapService.fitToDestinations(this.destinations, ALL_DESTINATIONS_ZOOM_OPTIONS);
 
-      // Ustaw domyślny status
+      // Ustaw domyĹ›lny status
       uiService.setDefaultStatus();
 
-      // Skonfiguruj obsługę zdarzeń UI
+      // Skonfiguruj obsĹ‚ugÄ™ zdarzeĹ„ UI
       this.setupUIHandlers();
 
       this.isInitialized = true;
-      console.log('Aplikacja Roamly została zainicjalizowana');
+      console.log('Aplikacja Roamly zostaĹ‚a zainicjalizowana');
     } catch (error) {
-      console.error('Błąd podczas inicjalizacji aplikacji:', error);
-      uiService.showError('Nie udało się załadować aplikacji');
+      console.error('BĹ‚Ä…d podczas inicjalizacji aplikacji:', error);
+      uiService.showError('Nie udaĹ‚o siÄ™ zaĹ‚adowaÄ‡ aplikacji');
     }
   }
 
@@ -82,21 +84,26 @@ export class RoamlyApp {
   }
 
   /**
-   * Konfiguruje obsługę zdarzeń UI
+   * Konfiguruje obsĹ‚ugÄ™ zdarzeĹ„ UI
    */
   private setupUIHandlers(): void {
-    // Obsługa kliknięcia na nakładkę
+    // ObsĹ‚uga klikniÄ™cia na nakĹ‚adkÄ™
     uiService.onOverlayClick(() => this.closeDetails());
 
-    // Obsługa kliknięcia na przycisk zamknięcia
+    // ObsĹ‚uga klikniÄ™cia na przycisk zamkniÄ™cia
     uiService.onCloseButtonClick(() => this.closeDetails());
   }
 
   /**
-   * Obsługuje zmianę filtrów
+   * ObsĹ‚uguje zmianÄ™ filtrĂłw
    * @param filteredDestinations - Przefiltrowane miejsca docelowe
    */
   private handleFilterChange(filteredDestinations: Destination[]): void {
+    this.filteredDestinations = [...filteredDestinations];
+
+    if (uiService.isDetailsVisible()) {
+      return;
+    }
     // Aktualizuj znaczniki na mapie
     mapService.updateMarkers(filteredDestinations, (dest) => this.onMarkerClick(dest));
 
@@ -107,20 +114,23 @@ export class RoamlyApp {
   }
 
   /**
-   * Obsługuje kliknięcie na znacznik
-   * @param destination - Kliknięte miejsce docelowe
+   * ObsĹ‚uguje klikniÄ™cie na znacznik
+   * @param destination - KlikniÄ™te miejsce docelowe
    */
   private onMarkerClick(destination: Destination): void {
-    // Nie uruchamiaj nowej podróży jeśli animacja jest w toku
+    // Nie uruchamiaj nowej podrĂłĹĽy jeĹ›li animacja jest w toku
     if (animationService.isAnimatingNow()) {
       return;
     }
+
+    // Ukryj pozostaĹ‚e znaczniki od razu po wyborze celu
+    mapService.updateMarkers([destination], (dest) => this.onMarkerClick(dest));
 
     this.prepareJourney(destination);
   }
 
   /**
-   * Przygotowuje podróż - najpierw zoom, potem animacja
+   * Przygotowuje podrĂłĹĽ - najpierw zoom, potem animacja
    * @param destination - Miejsce docelowe
    */
   private prepareJourney(destination: Destination): void {
@@ -129,14 +139,14 @@ export class RoamlyApp {
     // Zoom do trasy
     mapService.fitToRoute(destination.start, destination.coords, ROUTE_ZOOM_OPTIONS);
 
-    // Rozpocznij animację po zakończeniu zoomu
+    // Rozpocznij animacjÄ™ po zakoĹ„czeniu zoomu
     mapService.once('moveend', () => {
       setTimeout(() => this.startJourney(destination), 200);
     });
   }
 
   /**
-   * Rozpoczyna animację podróży
+   * Rozpoczyna animacjÄ™ podrĂłĹĽy
    * @param destination - Miejsce docelowe
    */
   private startJourney(destination: Destination): void {
@@ -145,12 +155,12 @@ export class RoamlyApp {
     animationService.startAnimation(
       destination,
       () => this.finishJourney(destination)
-      // Opcjonalnie: obsługa postępu animacji
+      // Opcjonalnie: obsĹ‚uga postÄ™pu animacji
     );
   }
 
   /**
-   * Kończy podróż i pokazuje szczegóły
+   * KoĹ„czy podrĂłĹĽ i pokazuje szczegĂłĹ‚y
    * @param destination - Miejsce docelowe
    */
   private finishJourney(destination: Destination): void {
@@ -162,27 +172,33 @@ export class RoamlyApp {
   }
 
   /**
-   * Pokazuje szczegóły miejsca
+   * Pokazuje szczegĂłĹ‚y miejsca
    * @param destination - Miejsce docelowe
    */
   private showDetails(destination: Destination): void {
     uiService.showDetails(destination);
 
-    // Zoom do szczegółów
+    // Ukryj pozostałe znaczniki na czas podglądu szczegółów
+    mapService.updateMarkers([destination], (dest) => this.onMarkerClick(dest));
+
+    // Zoom do szczegĂłĹ‚Ăłw
     mapService.zoomTo(destination.coords, 10, DETAILS_ZOOM_OPTIONS);
   }
 
   /**
-   * Zamyka szczegóły i resetuje widok
+   * Zamyka szczegĂłĹ‚y i resetuje widok
    */
   private closeDetails(): void {
     uiService.hideDetails();
 
-    // Wyczyść trasę
+    // WyczyĹ›Ä‡ trasÄ™
     mapService.clearRoute();
 
+    // PrzywrĂłÄ‡ znaczniki zgodne z filtrami
+    mapService.updateMarkers(this.filteredDestinations, (dest) => this.onMarkerClick(dest));
+
     // Resetuj widok mapy
-    mapService.fitToDestinations(this.destinations, ALL_DESTINATIONS_ZOOM_OPTIONS);
+    mapService.fitToDestinations(this.filteredDestinations, ALL_DESTINATIONS_ZOOM_OPTIONS);
 
     // Resetuj status
     uiService.setDefaultStatus();
@@ -218,8 +234,8 @@ export class RoamlyApp {
 
   /**
    * Usuwa miejsce docelowe
-   * @param id - ID miejsca docelowego do usunięcia
-   * @returns True jeśli miejsce zostało usunięte
+   * @param id - ID miejsca docelowego do usuniÄ™cia
+   * @returns True jeĹ›li miejsce zostaĹ‚o usuniÄ™te
    */
   removeDestination(id: number): boolean {
     const index = this.destinations.findIndex((dest) => dest.id === id);
@@ -251,14 +267,14 @@ export class RoamlyApp {
 
   /**
    * Sprawdza czy aplikacja jest zainicjalizowana
-   * @returns True jeśli aplikacja jest zainicjalizowana
+   * @returns True jeĹ›li aplikacja jest zainicjalizowana
    */
   isReady(): boolean {
     return this.isInitialized;
   }
 
   /**
-   * Niszczy aplikację i czyści zasoby
+   * Niszczy aplikacjÄ™ i czyĹ›ci zasoby
    */
   destroy(): void {
     mapService.destroy();

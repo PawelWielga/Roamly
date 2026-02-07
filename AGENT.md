@@ -1,12 +1,12 @@
-# Instrukcje dla Agentów AI
+﻿# Instrukcje dla AgentĂłw AI
 
 ## Informacje o projekcie
 
-Projekt **Roamly** to interaktywna mapa podróży z animacjami pojazdów, zbudowana przy użyciu:
+Projekt **Roamly** to interaktywna mapa podrĂłĹĽy z animacjami pojazdĂłw, zbudowana przy uĹĽyciu:
 
-- **TypeScript** - język programowania
+- **TypeScript** - jÄ™zyk programowania
 
-- **Vite** - narzędzie do budowania aplikacji
+- **Vite** - narzÄ™dzie do budowania aplikacji
 
 - **Leaflet** - biblioteka do map
 
@@ -18,77 +18,77 @@ Projekt **Roamly** to interaktywna mapa podróży z animacjami pojazdów, zbudow
 
 Roamly/
 
-├── src/
+â”śâ”€â”€ src/
 
-│   ├── app/
+â”‚   â”śâ”€â”€ app/
 
-│   │   └── app.ts              # Główna klasa aplikacji
+â”‚   â”‚   â””â”€â”€ app.ts              # GĹ‚Ăłwna klasa aplikacji
 
-│   ├── constants/
+â”‚   â”śâ”€â”€ constants/
 
-│   │   ├── mapConfig.ts        # Konfiguracja mapy
+â”‚   â”‚   â”śâ”€â”€ mapConfig.ts        # Konfiguracja mapy
 
-│   │   └── vehicleIcons.ts    # Ikony pojazdów
+â”‚   â”‚   â””â”€â”€ vehicleIcons.ts    # Ikony pojazdĂłw
 
-│   ├── services/
+â”‚   â”śâ”€â”€ services/
 
-│   │   ├── animationService.ts # Serwis animacji
+â”‚   â”‚   â”śâ”€â”€ animationService.ts # Serwis animacji
 
-│   │   ├── dataService.ts      # Serwis danych
+â”‚   â”‚   â”śâ”€â”€ dataService.ts      # Serwis danych
 
-│   │   ├── filterService.ts    # Serwis filtrów (nowy)
+â”‚   â”‚   â”śâ”€â”€ filterService.ts    # Serwis filtrĂłw (nowy)
 
-│   │   ├── mapService.ts      # Serwis mapy
+â”‚   â”‚   â”śâ”€â”€ mapService.ts      # Serwis mapy
 
-│   │   └── uiService.ts       # Serwis UI
+â”‚   â”‚   â””â”€â”€ uiService.ts       # Serwis UI
 
-│   ├── types/
+â”‚   â”śâ”€â”€ types/
 
-│   │   └── index.ts           # Typy TypeScript
+â”‚   â”‚   â””â”€â”€ index.ts           # Typy TypeScript
 
-│   └── main.ts               # Punkt wejścia
+â”‚   â””â”€â”€ main.ts               # Punkt wejĹ›cia
 
-├── public/
+â”śâ”€â”€ public/
 
-│   ├── styles.css             # Style CSS
+â”‚   â”śâ”€â”€ styles.css             # Style CSS
 
-│   └── destinations.json      # Dane podróży
+â”‚   â””â”€â”€ destinations.json      # Dane podrĂłĹĽy
 
-├── index.html                 # Główny plik HTML
+â”śâ”€â”€ index.html                 # GĹ‚Ăłwny plik HTML
 
-├── plans/                    # Plany implementacji
+â”śâ”€â”€ plans/                    # Plany implementacji
 
-└── AGENT.md                  # Ten plik
+â””â”€â”€ AGENT.md                  # Ten plik
 
 ```
 
-## Ważne zasady
+## WaĹĽne zasady
 
-### Końce linii
+### KoĹ„ce linii
 
-**KRYTYCZNE:** Wszystkie pliki muszą używać końców linii **CRLF** (Windows), a nie LF (Unix).
+**KRYTYCZNE:** Wszystkie pliki muszÄ… uĹĽywaÄ‡ koĹ„cĂłw linii **CRLF** (Windows), a nie LF (Unix).
 
-- Ustaw edytor na CRLF i utrzymuj spójne końce linii
+- Ustaw edytor na CRLF i utrzymuj spĂłjne koĹ„ce linii
 
-- Unikaj używania poleceń PowerShell do konwersji końców linii podczas pracy
+- Unikaj uĹĽywania poleceĹ„ PowerShell do konwersji koĹ„cĂłw linii podczas pracy
 
 ### Styl kodu
 
-- Używaj TypeScript z typowaniem
+- UĹĽywaj TypeScript z typowaniem
 
 - Komentarze JSDoc dla wszystkich publicznych metod
 
-- Singleton pattern dla serwisów (export const serviceName = new ServiceClass())
+- Singleton pattern dla serwisĂłw (export const serviceName = new ServiceClass())
 
 - Nazewnictwo: camelCase dla zmiennych/metod, PascalCase dla klas
 
 ### Kolory i stylistyka
 
-- Kolor główny: `#3b82f6` (niebieski)
+- Kolor gĹ‚Ăłwny: `#3b82f6` (niebieski)
 
 - Kolor ciemniejszy: `#2563eb`
 
-- Kolor tła: `#ffffff` (biały)
+- Kolor tĹ‚a: `#ffffff` (biaĹ‚y)
 
 - Kolor tekstu: `#1f2937`, `#374151`, `#4b5563`, `#6b7280`
 
@@ -100,47 +100,47 @@ Roamly/
 
 ### dataService.ts
 
-Odpowiedzialny za ładowanie i zarządzanie danymi podróży z pliku `destinations.json`.
+Odpowiedzialny za Ĺ‚adowanie i zarzÄ…dzanie danymi podrĂłĹĽy z pliku `destinations.json`.
 
 ### mapService.ts
 
-Odpowiedzialny za zarządzanie mapą Leaflet:
+Odpowiedzialny za zarzÄ…dzanie mapÄ… Leaflet:
 
 - `initializeMap()` - inicjalizacja mapy
 
-- `addMarker()` - dodawanie znaczników
+- `addMarker()` - dodawanie znacznikĂłw
 
-- `updateMarkers()` - aktualizacja znaczników (nowa metoda)
+- `updateMarkers()` - aktualizacja znacznikĂłw (nowa metoda)
 
 - `fitToDestinations()` - dopasowanie widoku do miejsc
 
-- `clearMarkers()` - usuwanie wszystkich znaczników
+- `clearMarkers()` - usuwanie wszystkich znacznikĂłw
 
 ### uiService.ts
 
-Odpowiedzialny za zarządzanie interfejsem użytkownika:
+Odpowiedzialny za zarzÄ…dzanie interfejsem uĹĽytkownika:
 
-- `showDetails()` - pokazywanie karty szczegółów
+- `showDetails()` - pokazywanie karty szczegĂłĹ‚Ăłw
 
-- `hideDetails()` - ukrywanie karty szczegółów
+- `hideDetails()` - ukrywanie karty szczegĂłĹ‚Ăłw
 
 - `updateStatus()` - aktualizacja tekstu statusu
 
 ### filterService.ts (nowy)
 
-Odpowiedzialny za zarządzanie panelem filtrów:
+Odpowiedzialny za zarzÄ…dzanie panelem filtrĂłw:
 
 - `initialize()` - inicjalizacja serwisu
 
 - `setDestinations()` - ustawienie danych i budowanie panelu
 
-- `onFilterChange()` - callback dla zmiany filtrów
+- `onFilterChange()` - callback dla zmiany filtrĂłw
 
 - `reset()` - resetowanie stanu
 
 ### animationService.ts
 
-Odpowiedzialny za animację pojazdów na trasie.
+Odpowiedzialny za animacjÄ™ pojazdĂłw na trasie.
 
 ## Typy danych
 
@@ -152,13 +152,13 @@ interface Destination {
 
   type: VehicleType; // 'plane' | 'train' | 'car'
 
-  start: [number, number]; // [szerokość, długość]
+  start: [number, number]; // [szerokoĹ›Ä‡, dĹ‚ugoĹ›Ä‡]
 
   name: string;
 
-  coords: [number, number]; // [szerokość, długość]
+  coords: [number, number]; // [szerokoĹ›Ä‡, dĹ‚ugoĹ›Ä‡]
 
-  date: string; // np. "Sierpień 2023"
+  date: string; // np. "SierpieĹ„ 2023"
 
   description: string;
 
@@ -176,43 +176,43 @@ interface FilterState {
 }
 ```
 
-## Panel filtrów
+## Panel filtrĂłw
 
-Panel filtrów znajduje się po lewej stronie mapy i pozwala na:
+Panel filtrĂłw znajduje siÄ™ po lewej stronie mapy i pozwala na:
 
 - Filtrowanie po latach (dynamicznie pobierane z danych)
 
-- Filtrowanie po środkach transportu (plane, train, car)
+- Filtrowanie po Ĺ›rodkach transportu (plane, train, car)
 
 - Zwijanie/rozwijanie panelu
 
-- Resetowanie filtrów
+- Resetowanie filtrĂłw
 
 ### Elementy HTML
 
-- `#filterPanel` - główny kontener panelu
+- `#filterPanel` - gĹ‚Ăłwny kontener panelu
 
 - `#toggleFilterBtn` - przycisk zwijania/rozwijania
 
-- `#toggleIcon` - ikona przycisku (◀/▶)
+- `#toggleIcon` - ikona przycisku (â—€/â–¶)
 
-- `#yearFilters` - kontener checkboxów dla lat
+- `#yearFilters` - kontener checkboxĂłw dla lat
 
-- `#vehicleFilters` - kontener checkboxów dla środków transportu
+- `#vehicleFilters` - kontener checkboxĂłw dla Ĺ›rodkĂłw transportu
 
 - `#resetFiltersBtn` - przycisk resetowania
 
 ### Klasy CSS
 
-- `.filter-panel` - główny panel
+- `.filter-panel` - gĹ‚Ăłwny panel
 
-- `.filter-panel.collapsed` - panel zwinięty
+- `.filter-panel.collapsed` - panel zwiniÄ™ty
 
 - `.toggle-filter-btn` - przycisk zwijania
 
-- `.filter-content` - zawartość panelu
+- `.filter-content` - zawartoĹ›Ä‡ panelu
 
-- `.filter-section` - sekcja filtrów
+- `.filter-section` - sekcja filtrĂłw
 
 - `.filter-checkbox` - checkbox
 
@@ -226,7 +226,7 @@ Panel filtrów znajduje się po lewej stronie mapy i pozwala na:
 
 ```bash
 
-npm install      # Instalacja zależności
+npm install      # Instalacja zaleĹĽnoĹ›ci
 
 npm run dev      # Uruchomienie serwera deweloperskiego
 
@@ -234,41 +234,43 @@ npm run build    # Budowanie projektu
 
 ```
 
-Serwer deweloperski działa na `http://localhost:3000/Roamly/`
+Serwer deweloperski dziaĹ‚a na `http://localhost:3000/Roamly/`
 
 ## Testowanie
 
-Przed zatwierdzeniem zmian sprawdź:
+Przed zatwierdzeniem zmian sprawdĹş:
 
-- Panel filtrów wyświetla się poprawnie po lewej stronie
+- Panel filtrĂłw wyĹ›wietla siÄ™ poprawnie po lewej stronie
 
-- Lata są dynamicznie pobierane z danych
+- Lata sÄ… dynamicznie pobierane z danych
 
-- Checkboxy działają poprawnie
+- Checkboxy dziaĹ‚ajÄ… poprawnie
 
-- Filtracja AND działa poprawnie
+- Filtracja AND dziaĹ‚a poprawnie
 
-- Przycisk zwijania/rozwijania działa
+- Przycisk zwijania/rozwijania dziaĹ‚a
 
-- Reset filtrów działa
+- Reset filtrĂłw dziaĹ‚a
 
-- Responsywność na urządzeniach mobilnych
+- Po wybraniu celu podrĂłĹĽy pozostaĹ‚e pinezki znikajÄ… do zamkniÄ™cia popupu
+
+- ResponsywnoĹ›Ä‡ na urzÄ…dzeniach mobilnych
 
 - Styl pasuje do reszty strony
 
-- Końce linii są CRLF (Windows)
+- KoĹ„ce linii sÄ… CRLF (Windows)
 
 ## Znane problemy
 
-- ESLint może zgłaszać błędy o końcach linii - zignoruj je, jeśli pliki działają poprawnie
+- ESLint moĹĽe zgĹ‚aszaÄ‡ bĹ‚Ä™dy o koĹ„cach linii - zignoruj je, jeĹ›li pliki dziaĹ‚ajÄ… poprawnie
 
-- Serwer deweloperski może blokować pliki podczas pracy - zatrzymaj go przed modyfikacją plików
+- Serwer deweloperski moĹĽe blokowaÄ‡ pliki podczas pracy - zatrzymaj go przed modyfikacjÄ… plikĂłw
 
-- W workflowach GitHub Actions lint, type-check oraz format-check są tymczasowo wyłączone (zastąpione krokami no-op); szczegóły w `plans/ci-checks-removed.md`.
+- W workflowach GitHub Actions lint, type-check oraz format-check sÄ… tymczasowo wyĹ‚Ä…czone (zastÄ…pione krokami no-op); szczegĂłĹ‚y w `plans/ci-checks-removed.md`.
 
 ## GitHub Pages i domena
 
-- Plik `public/CNAME` zawiera domenę niestandardową dla GitHub Pages i jest kopiowany do `dist` podczas builda.
+- Plik `public/CNAME` zawiera domenÄ™ niestandardowÄ… dla GitHub Pages i jest kopiowany do `dist` podczas builda.
 - Workflow deploy ustawia `cname: wycieczki.dihor.pl` jako dodatkowe zabezpieczenie.
 
 ## Utrzymanie AGENT.md
