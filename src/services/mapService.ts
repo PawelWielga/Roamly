@@ -1,4 +1,4 @@
-import L from 'leaflet';
+﻿import L from 'leaflet';
 import { Destination, MapConfig, ZoomOptions } from '../types/index';
 import {
   DEFAULT_MAP_CONFIG,
@@ -11,7 +11,7 @@ import {
 import { getVehicleColor, getVehicleSvg } from '../constants/vehicleIcons';
 
 /**
- * Serwis odpowiedzialny za zarządzanie mapą Leaflet
+ * Serwis odpowiedzialny za zarzÄ…dzanie mapÄ… Leaflet
  */
 export class MapService {
   private map: L.Map | null = null;
@@ -20,14 +20,14 @@ export class MapService {
   private currentVehicle: L.Marker | null = null;
 
   /**
-   * Inicjalizuje mapę
+   * Inicjalizuje mapÄ™
    * @param containerId - ID kontenera mapy
    * @param config - Konfiguracja mapy
    * @returns Zainicjalizowana mapa
    */
   initializeMap(containerId: string, config: MapConfig = DEFAULT_MAP_CONFIG): L.Map {
     if (this.map) {
-      console.warn('Mapa jest już zainicjalizowana');
+      console.warn('Mapa jest juĹĽ zainicjalizowana');
       return this.map;
     }
 
@@ -41,7 +41,7 @@ export class MapService {
   }
 
   /**
-   * Pobiera instancję mapy
+   * Pobiera instancjÄ™ mapy
    * @returns Instancja mapy lub null
    */
   getMap(): L.Map | null {
@@ -51,7 +51,7 @@ export class MapService {
   /**
    * Dodaje znacznik dla miejsca docelowego
    * @param destination - Miejsce docelowe
-   * @param onClick - Funkcja wywoływana po kliknięciu
+   * @param onClick - Funkcja wywoĹ‚ywana po klikniÄ™ciu
    * @returns Utworzony znacznik
    */
   addMarker(destination: Destination, onClick?: (dest: Destination) => void): L.Marker {
@@ -62,7 +62,7 @@ export class MapService {
     const markerColor = getVehicleColor(destination.type);
 
     const markerIconHtml = `
-      <div class="destination-marker" style="--marker-color: ${markerColor};">
+      <div class="destination-marker destination-marker--${destination.type}" style="--marker-color: ${markerColor};">
         <span class="destination-marker__pulse"></span>
         <span class="destination-marker__ring"></span>
         <span class="destination-marker__icon">${getVehicleSvg(destination.type)}</span>
@@ -118,11 +118,11 @@ export class MapService {
 
   /**
    * Aktualizuje znaczniki na mapie
-   * @param destinations - Tablica miejsc docelowych do wyświetlenia
-   * @param onClick - Funkcja wywoływana po kliknięciu
+   * @param destinations - Tablica miejsc docelowych do wyĹ›wietlenia
+   * @param onClick - Funkcja wywoĹ‚ywana po klikniÄ™ciu
    */
   updateMarkers(destinations: Destination[], onClick?: (dest: Destination) => void): void {
-    // Usuń wszystkie istniejące znaczniki
+    // UsuĹ„ wszystkie istniejÄ…ce znaczniki
     this.clearMarkers();
 
     // Dodaj nowe znaczniki
@@ -154,7 +154,7 @@ export class MapService {
   /**
    * Dostosowuje widok mapy do trasy
    * @param start - Punkt startowy
-   * @param end - Punkt końcowy
+   * @param end - Punkt koĹ„cowy
    * @param options - Opcje zoomu
    */
   fitToRoute(start: [number, number], end: [number, number], options?: ZoomOptions): void {
@@ -169,7 +169,7 @@ export class MapService {
 
   /**
    * Zoomuje do konkretnego miejsca
-   * @param coords - Współrzędne
+   * @param coords - WspĂłĹ‚rzÄ™dne
    * @param zoom - Poziom zoomu
    * @param options - Opcje zoomu
    */
@@ -183,7 +183,7 @@ export class MapService {
   }
 
   /**
-   * Tworzy linię trasy
+   * Tworzy liniÄ™ trasy
    * @param color - Kolor linii
    * @param dashArray - Wzorzec linii przerywanej
    * @returns Utworzona linia
@@ -208,8 +208,8 @@ export class MapService {
   }
 
   /**
-   * Aktualizuje linię trasy
-   * @param points - Tablica punktów
+   * Aktualizuje liniÄ™ trasy
+   * @param points - Tablica punktĂłw
    */
   updatePath(points: [number, number][]): void {
     if (this.currentPath) {
@@ -218,7 +218,7 @@ export class MapService {
   }
 
   /**
-   * Usuwa linię trasy
+   * Usuwa liniÄ™ trasy
    */
   removePath(): void {
     if (this.currentPath) {
@@ -229,7 +229,7 @@ export class MapService {
 
   /**
    * Tworzy znacznik pojazdu
-   * @param position - Pozycja początkowa
+   * @param position - Pozycja poczÄ…tkowa
    * @param iconHtml - HTML ikony
    * @returns Utworzony znacznik pojazdu
    */
@@ -241,8 +241,8 @@ export class MapService {
     const icon = L.divIcon({
       html: iconHtml,
       className: 'vehicle-container',
-      iconSize: [30, 30],
-      iconAnchor: [15, 15],
+      iconSize: [18, 18],
+      iconAnchor: [9, 9],
     });
 
     const marker = L.marker(position, { icon, interactive: false }).addTo(this.map);
@@ -251,7 +251,7 @@ export class MapService {
   }
 
   /**
-   * Aktualizuje pozycję pojazdu
+   * Aktualizuje pozycjÄ™ pojazdu
    * @param position - Nowa pozycja
    */
   updateVehiclePosition(position: [number, number]): void {
@@ -261,8 +261,8 @@ export class MapService {
   }
 
   /**
-   * Aktualizuje rotację ikony pojazdu
-   * @param rotation - Kąt rotacji w stopniach
+   * Aktualizuje rotacjÄ™ ikony pojazdu
+   * @param rotation - KÄ…t rotacji w stopniach
    */
   updateVehicleRotation(rotation: number): void {
     if (this.currentVehicle) {
@@ -277,7 +277,7 @@ export class MapService {
   }
 
   /**
-   * Dodaje klasę lądowania do ikony pojazdu
+   * Dodaje klasÄ™ lÄ…dowania do ikony pojazdu
    */
   addLandingAnimation(): void {
     if (this.currentVehicle) {
@@ -302,7 +302,7 @@ export class MapService {
   }
 
   /**
-   * Usuwa wszystkie elementy trasy (pojazd i ścieżkę)
+   * Usuwa wszystkie elementy trasy (pojazd i Ĺ›cieĹĽkÄ™)
    */
   clearRoute(): void {
     this.removeVehicle();
@@ -310,34 +310,34 @@ export class MapService {
   }
 
   /**
-   * Dodaje nasłuchiwacz zdarzenia
+   * Dodaje nasĹ‚uchiwacz zdarzenia
    * @param event - Nazwa zdarzenia
-   * @param handler - Funkcja obsługująca zdarzenie
+   * @param handler - Funkcja obsĹ‚ugujÄ…ca zdarzenie
    */
   on(event: string, handler: (...args: unknown[]) => void): void {
     this.map?.on(event, handler);
   }
 
   /**
-   * Dodaje nasłuchiwacz zdarzenia, który zostanie usunięty po pierwszym wywołaniu
+   * Dodaje nasĹ‚uchiwacz zdarzenia, ktĂłry zostanie usuniÄ™ty po pierwszym wywoĹ‚aniu
    * @param event - Nazwa zdarzenia
-   * @param handler - Funkcja obsługująca zdarzenie
+   * @param handler - Funkcja obsĹ‚ugujÄ…ca zdarzenie
    */
   once(event: string, handler: (...args: unknown[]) => void): void {
     this.map?.once(event, handler);
   }
 
   /**
-   * Usuwa nasłuchiwacz zdarzenia
+   * Usuwa nasĹ‚uchiwacz zdarzenia
    * @param event - Nazwa zdarzenia
-   * @param handler - Funkcja obsługująca zdarzenie
+   * @param handler - Funkcja obsĹ‚ugujÄ…ca zdarzenie
    */
   off(event: string, handler: (...args: unknown[]) => void): void {
     this.map?.off(event, handler);
   }
 
   /**
-   * Niszczy mapę i czyści zasoby
+   * Niszczy mapÄ™ i czyĹ›ci zasoby
    */
   destroy(): void {
     if (this.map) {

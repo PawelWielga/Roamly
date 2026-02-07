@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Main styles for the Roamly app
  */
 
@@ -121,7 +121,7 @@ body {
   position: absolute;
   inset: -6px;
   border-radius: 50%;
-  border: 1px solid currentColor;
+  border: 1px solid #797979;
   opacity: 0.6;
   animation: markerPulse 2.4s ease-out infinite;
 }
@@ -131,24 +131,28 @@ body {
   inset: 0;
   border-radius: 50%;
   background: rgba(246, 247, 245, 0.94);
-  border: 2px solid currentColor;
+  border: 2px solid #838383;
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.2);
 }
 
 .destination-marker__icon {
   position: relative;
   z-index: 1;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .destination-marker .vehicle-icon-svg {
-  width: 18px;
-  height: 18px;
+  height: 56px;
   filter: drop-shadow(0 2px 4px rgba(15, 23, 42, 0.25));
+}
+
+.destination-marker--car .vehicle-icon-svg,
+.destination-marker--train .vehicle-icon-svg {
+  transform: rotate(180deg);
 }
 
 .leaflet-marker-icon.destination-marker-wrapper {
@@ -213,6 +217,11 @@ body {
   transition: transform 0.1s linear;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
   will-change: transform;
+}
+
+.vehicle-container .vehicle-icon-svg {
+  width: 60px;
+  height: 60px;
 }
 
 /* Landing animation */
@@ -769,11 +778,11 @@ body {
 /* High contrast */
 @media (prefers-contrast: high) {
   .details-card {
-    border: 2px solid #000;
+    border: 2px solid #151515;
   }
 
   .close-button {
-    border: 2px solid #000;
+    border: 2px solid #151515;
   }
 }
 
@@ -873,7 +882,7 @@ body {
   position: relative;
   width: 100%;
   padding-top: 56.25%; /* 16:9 aspect ratio */
-  background: #000;
+  background: #151515;
 }
 
 .video-frame {
@@ -911,3 +920,7 @@ body {
     font-size: 1rem;
   }
 }
+
+
+
+
