@@ -3,68 +3,92 @@
     {
       "id": 1,
       "type": "plane",
-      "start": [52.1672, 20.9679],
-      "name": "Valletta, Malta",
-      "coords": [35.8989, 14.5146],
-      "date": "Sierpień 2023",
-      "description": "Słoneczna wyspa pełna historii.",
-      "imageUrl": "https://images.unsplash.com/photo-1516471841702-81e39a0ff39a?auto=format&fit=crop&w=600",
-      "videoUrl": ""
-    },
-    {
-      "id": 2,
-      "type": "plane",
-      "start": [52.1672, 20.9679],
-      "name": "Budapeszt, Węgry",
-      "coords": [47.4979, 19.0402],
-      "date": "Grudzień 2023",
-      "description": "Perła Dunaju i piękne termy.",
-      "imageUrl": "https://images.unsplash.com/photo-1517713982677-4b66332f98de?auto=format&fit=crop&w=600",
-      "videoUrl": ""
-    },
-    {
-      "id": 3,
-      "type": "plane",
-      "start": [52.1672, 20.9679],
-      "name": "Alicante, Hiszpania",
-      "coords": [38.3452, -0.481],
-      "date": "Lipiec 2024",
-      "description": "Słońce na Costa Blanca.",
-      "imageUrl": "https://images.unsplash.com/photo-1560942485-b2a11cc13456?auto=format&fit=crop&w=600",
-      "videoUrl": ""
-    },
-    {
-      "id": 4,
-      "type": "train",
-      "start": [53.7784, 20.4801],
-      "name": "Kraków, Polska",
-      "coords": [50.0647, 19.945],
-      "date": "Październik 2024",
-      "description": "Podróż pociągiem PKP Intercity na południe Polski.",
-      "imageUrl": "https://images.unsplash.com/photo-1512470876302-972fad2aa9dd?auto=format&fit=crop&w=600",
-      "videoUrl": ""
-    },
-    {
-      "id": 5,
-      "type": "car",
-      "start": [53.7784, 20.4801],
-      "name": "Gdańsk, Polska",
-      "coords": [54.352, 18.6466],
-      "date": "Listopad 2024",
-      "description": "Szybki wypad samochodem nad morze siódemką.",
-      "imageUrl": "https://images.unsplash.com/photo-1565039230199-bf93332d7335?auto=format&fit=crop&w=600",
-      "videoUrl": ""
-    },
-    {
-      "id": 6,
-      "type": "plane",
-      "start": [51.3889, 21.2117],
-      "name": "Larnaka, Cypr",
-      "coords": [34.9003, 33.6232],
+      "start": [
+        52.2297,
+        21.0122
+      ],
+      "startName": "Lotnisko Warszawa-Radom",
+      "destinationName": "Larnaka",
+      "coords": [
+        34.9003,
+        33.6232
+      ],
       "date": "24-27.01.2026",
       "description": "Brak",
       "imageUrl": "",
       "videoUrl": "https://www.youtube.com/watch?v=yuuFSz5KfAc"
+    },
+    {
+      "id": 2,
+      "type": "plane",
+      "start": [
+        52.2297,
+        21.0122
+      ],
+      "startName": "",
+      "destinationName": "MALTA",
+      "coords": [
+        35.8989,
+        14.5146
+      ],
+      "date": "czerwiec 2025",
+      "description": "Brak",
+      "imageUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=OHgIVaxNS3k"
+    },
+    {
+      "id": 3,
+      "type": "plane",
+      "start": [
+        52.2297,
+        21.0122
+      ],
+      "startName": "",
+      "destinationName": "ALICANTE",
+      "coords": [
+        38.3452,
+        -0.481
+      ],
+      "date": "ferie zimowe 2025",
+      "description": "Brak",
+      "imageUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=fiaw_wUnM-E"
+    },
+    {
+      "id": 4,
+      "type": "train",
+      "start": [
+        52.2297,
+        21.0122
+      ],
+      "startName": "",
+      "destinationName": "KRAKÓW",
+      "coords": [
+        50.0647,
+        19.945
+      ],
+      "date": "majówka 2025",
+      "description": "Brak",
+      "imageUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=gBc-F8dWNxA"
+    },
+    {
+      "id": 5,
+      "type": "plane",
+      "start": [
+        52.2297,
+        21.0122
+      ],
+      "startName": "",
+      "destinationName": "BUDAPESZT",
+      "coords": [
+        47.4979,
+        19.0402
+      ],
+      "date": "lipiec 2025",
+      "description": "Brak",
+      "imageUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=vWL6IOn9ZwA"
     }
   ]
 }

@@ -134,7 +134,7 @@ export class RoamlyApp {
    * @param destination - Miejsce docelowe
    */
   private prepareJourney(destination: Destination): void {
-    uiService.setPreparingStatus(destination.name);
+    uiService.setPreparingStatus(this.getStartNameForStatus(destination), destination.destinationName);
 
     // Zoom do trasy
     mapService.fitToRoute(destination.start, destination.coords, ROUTE_ZOOM_OPTIONS);
@@ -150,7 +150,7 @@ export class RoamlyApp {
    * @param destination - Miejsce docelowe
    */
   private startJourney(destination: Destination): void {
-    uiService.setMovingStatus(destination.type, destination.name);
+    uiService.setMovingStatus(destination.type, destination.destinationName);
 
     animationService.startAnimation(
       destination,
@@ -164,7 +164,7 @@ export class RoamlyApp {
    * @param destination - Miejsce docelowe
    */
   private finishJourney(destination: Destination): void {
-    uiService.setArrivedStatus(destination.name);
+    uiService.setArrivedStatus(destination.destinationName);
 
     setTimeout(() => {
       this.showDetails(destination);
@@ -219,6 +219,15 @@ export class RoamlyApp {
    */
   getDestinationById(id: number): Destination | undefined {
     return this.destinations.find((dest) => dest.id === id);
+  }
+
+  /**
+   * Pobiera domyślną nazwę miejsca startowego
+   * @returns Nazwa miejsca startowego
+   */
+  private getStartNameForStatus(destination: Destination): string {
+    const startName = destination.startName?.trim();
+    return startName && startName.length > 0 ? startName : 'startu';
   }
 
   /**

@@ -60,11 +60,12 @@ export const DETAILS_ZOOM_OPTIONS = {
  */
 export const STATUS_TEXTS = {
   IDLE: 'Wybierz cel podróży na mapie',
-  PREPARING: (destination: string) => `Przygotowanie trasy: ${destination}`,
+  PREPARING: (startName: string, destination: string) =>
+    `Przygotowanie trasy z ${startName} do ${destination}`,
   MOVING_PLANE: (destination: string) => `Lot do: ${destination}`,
   MOVING_TRAIN: (destination: string) => `Podróż pociągiem do: ${destination}`,
   MOVING_CAR: (destination: string) => `Przejazd samochodem do: ${destination}`,
-  ARRIVED: (destination: string) => `Dotarto do celu: ${destination}`,
+  ARRIVED: (destination: string) => `Dotarłeś do celu: ${destination}`,
 };
 
 /**

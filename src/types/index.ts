@@ -13,8 +13,10 @@ export interface Destination {
   type: VehicleType;
   /** Współrzędne punktu startowego [szerokość, długość] */
   start: [number, number];
+  /** Nazwa miejsca startowego (opcjonalna) */
+  startName?: string;
   /** Nazwa miejsca docelowego */
-  name: string;
+  destinationName: string;
   /** Współrzędne miejsca docelowego [szerokość, długość] */
   coords: [number, number];
   /** Data podróży */

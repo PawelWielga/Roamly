@@ -11,6 +11,7 @@ export class UIService {
   private destImageElement: HTMLElement | null = null;
   private destTitleElement: HTMLElement | null = null;
   private destDateElement: HTMLElement | null = null;
+  private destStartElement: HTMLElement | null = null;
   private destDescElement: HTMLElement | null = null;
   private videoModalElement: HTMLElement | null = null;
   private videoFrameElement: HTMLIFrameElement | null = null;
@@ -55,6 +56,7 @@ export class UIService {
     this.destImageElement = document.getElementById('destImage');
     this.destTitleElement = document.getElementById('destTitle');
     this.destDateElement = document.getElementById('destDate');
+    this.destStartElement = document.getElementById('destStart');
     this.destDescElement = document.getElementById('destDesc');
     this.videoModalElement = document.getElementById('videoModal');
     this.videoFrameElement = document.getElementById('videoFrame') as HTMLIFrameElement | null;
@@ -118,8 +120,8 @@ export class UIService {
    * Ustawia tekst statusu przygotowania
    * @param destination - Nazwa miejsca docelowego
    */
-  setPreparingStatus(destination: string): void {
-    this.updateStatus(STATUS_TEXTS.PREPARING(destination));
+  setPreparingStatus(startName: string, destination: string): void {
+    this.updateStatus(STATUS_TEXTS.PREPARING(startName, destination));
   }
 
   /**
@@ -154,8 +156,18 @@ export class UIService {
       return;
     }
 
-    this.destTitleElement.textContent = destination.name;
+    this.destTitleElement.textContent = destination.destinationName;
     this.destDateElement.textContent = destination.date;
+    const startName = destination.startName?.trim();
+    if (this.destStartElement) {
+      if (startName) {
+        this.destStartElement.textContent = `Wylot: ${startName}`;
+        this.destStartElement.style.display = 'block';
+      } else {
+        this.destStartElement.textContent = '';
+        this.destStartElement.style.display = 'none';
+      }
+    }
     this.destDescElement.textContent = destination.description;
     const videoUrl = destination.videoUrl?.trim();
     const imageUrl = destination.imageUrl?.trim();
@@ -178,7 +190,7 @@ export class UIService {
       this.destImageElement.removeAttribute('href');
       this.destImageElement.removeAttribute('target');
       this.destImageElement.removeAttribute('rel');
-      this.destImageElement.setAttribute('aria-label', `Otwórz film: ${destination.name}`);
+      this.destImageElement.setAttribute('aria-label', `Otwórz film: ${destination.destinationName}`);
       this.destImageElement.removeAttribute('aria-disabled');
       this.destImageElement.removeAttribute('tabindex');
       this.destImageElement.style.cursor = 'pointer';
@@ -186,7 +198,7 @@ export class UIService {
       this.destImageElement.removeAttribute('href');
       this.destImageElement.removeAttribute('target');
       this.destImageElement.removeAttribute('rel');
-      this.destImageElement.setAttribute('aria-label', `Zdjęcie miejsca: ${destination.name}`);
+      this.destImageElement.setAttribute('aria-label', `Zdjęcie miejsca: ${destination.destinationName}`);
       this.destImageElement.setAttribute('aria-disabled', 'true');
       this.destImageElement.setAttribute('tabindex', '-1');
       this.destImageElement.style.cursor = 'default';

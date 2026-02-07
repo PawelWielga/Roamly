@@ -79,7 +79,7 @@ export class MapService {
 
     const marker = L.marker(destination.coords, { icon }).addTo(this.map);
 
-    marker.bindTooltip(destination.name, {
+    marker.bindTooltip(destination.destinationName, {
       direction: 'top',
       offset: [0, -18],
       opacity: 0.95,
