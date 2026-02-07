@@ -18,7 +18,6 @@ export class FilterService {
   private yearFiltersElement: HTMLElement | null = null;
   private vehicleFiltersElement: HTMLElement | null = null;
   private toggleFilterBtnElement: HTMLElement | null = null;
-  private toggleIconElement: HTMLElement | null = null;
   private resetFiltersBtnElement: HTMLElement | null = null;
 
   /**
@@ -29,9 +28,9 @@ export class FilterService {
     this.yearFiltersElement = document.getElementById('yearFilters');
     this.vehicleFiltersElement = document.getElementById('vehicleFilters');
     this.toggleFilterBtnElement = document.getElementById('toggleFilterBtn');
-    this.toggleIconElement = document.getElementById('toggleIcon');
     this.resetFiltersBtnElement = document.getElementById('resetFiltersBtn');
 
+    this.collapsePanelOnInit();
     this.setupEventListeners();
   }
 
@@ -219,6 +218,15 @@ export class FilterService {
   private togglePanel(): void {
     this.isPanelCollapsed = !this.isPanelCollapsed;
 
+    this.syncPanelState();
+  }
+
+  private collapsePanelOnInit(): void {
+    this.isPanelCollapsed = true;
+    this.syncPanelState();
+  }
+
+  private syncPanelState(): void {
     if (this.filterPanelElement) {
       if (this.isPanelCollapsed) {
         this.filterPanelElement.classList.add('collapsed');
@@ -227,8 +235,11 @@ export class FilterService {
       }
     }
 
-    if (this.toggleIconElement) {
-      this.toggleIconElement.textContent = this.isPanelCollapsed ? '▶' : '◀';
+    if (this.toggleFilterBtnElement) {
+      this.toggleFilterBtnElement.setAttribute(
+        'aria-expanded',
+        this.isPanelCollapsed ? 'false' : 'true'
+      );
     }
   }
 

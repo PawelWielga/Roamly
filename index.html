@@ -9,6 +9,7 @@
     />
     <meta name="author" content="Roamly" />
     <title>Roamly - Moja Mapa Podr&#243;&#380;y</title>
+    <link rel="icon" type="image/png" href="/R.png" />
 
     <!-- Leaflet CSS -->
     <link
@@ -34,7 +35,21 @@
     <div class="app-content">
       <!-- Side Panel -->
       <aside id="filterPanel" class="filter-panel">
-        <h3 class="filter-title">Filtry</h3>
+        <h3 class="filter-title">
+          <button
+            id="toggleFilterBtn"
+            class="filter-title-btn"
+            type="button"
+            aria-expanded="true"
+            aria-label="Zwiń/rozwiń panel"
+          >
+            <span class="filter-title-text">Filtry</span>
+            <span class="filter-title-icons" aria-hidden="true">
+              <span class="filter-title-icon filter-title-icon--up">▲</span>
+              <span class="filter-title-icon filter-title-icon--down">▼</span>
+            </span>
+          </button>
+        </h3>
 
         <div class="filter-content">
           <h4 class="filter-section-title">Lata</h4>
@@ -46,14 +61,6 @@
           <button id="resetFiltersBtn" class="reset-filters-btn">Resetuj filtry</button>
         </div>
       </aside>
-
-      <button
-        id="toggleFilterBtn"
-        class="toggle-filter-btn"
-        aria-label="Zwi&#324;/rozwi&#324; panel"
-      >
-        <span id="toggleIcon">&#9664;</span>
-      </button>
 
       <!-- Map Container -->
       <div id="map" class="map-container"></div>
