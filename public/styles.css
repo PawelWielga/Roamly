@@ -739,6 +739,11 @@ body {
     bottom: 10px;
   }
 
+  .destination-marker {
+    transform: scale(0.6);
+    transform-origin: center;
+  }
+
   .dest-image {
     height: 160px;
   }
