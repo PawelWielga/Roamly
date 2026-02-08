@@ -8,7 +8,7 @@ import {
   ALL_DESTINATIONS_ZOOM_OPTIONS,
   DETAILS_ZOOM_OPTIONS,
 } from '../constants/mapConfig';
-import { getVehicleColor, getVehicleSvg } from '../constants/vehicleIcons';
+import { getVehicleColor, getVehicleMarkerSvg, getVehicleSvg } from '../constants/vehicleIcons';
 
 /**
  * Serwis odpowiedzialny za zarzÄ…dzanie mapÄ… Leaflet
@@ -65,7 +65,7 @@ export class MapService {
       <div class="destination-marker destination-marker--${destination.type}" style="--marker-color: ${markerColor};">
         <span class="destination-marker__pulse"></span>
         <span class="destination-marker__ring"></span>
-        <span class="destination-marker__icon">${getVehicleSvg(destination.type)}</span>
+        <span class="destination-marker__icon">${getVehicleMarkerSvg(destination.type)}</span>
       </div>
     `;
 

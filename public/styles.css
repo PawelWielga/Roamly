@@ -150,10 +150,6 @@ body {
   filter: drop-shadow(0 2px 4px rgba(15, 23, 42, 0.25));
 }
 
-.destination-marker--car .vehicle-icon-svg,
-.destination-marker--train .vehicle-icon-svg {
-  transform: rotate(180deg);
-}
 
 .leaflet-marker-icon.destination-marker-wrapper {
   background: transparent;
