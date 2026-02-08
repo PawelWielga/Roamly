@@ -1,0 +1,64 @@
+{
+  "destinations": [
+    {
+      "id": 1,
+      "type": "plane",
+      "start": [52.2297, 21.0122],
+      "startName": "Lotnisko Warszawa-Radom",
+      "destinationName": "Larnaka",
+      "coords": [34.9003, 33.6232],
+      "date": "24-27.01.2026",
+      "description": "Brak",
+      "imageUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=yuuFSz5KfAc"
+    },
+    {
+      "id": 2,
+      "type": "plane",
+      "start": [52.2297, 21.0122],
+      "startName": "",
+      "destinationName": "MALTA",
+      "coords": [35.8989, 14.5146],
+      "date": "czerwiec 2025",
+      "description": "Brak",
+      "imageUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=OHgIVaxNS3k"
+    },
+    {
+      "id": 3,
+      "type": "plane",
+      "start": [52.2297, 21.0122],
+      "startName": "",
+      "destinationName": "ALICANTE",
+      "coords": [38.3452, -0.481],
+      "date": "ferie zimowe 2025",
+      "description": "Brak",
+      "imageUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=fiaw_wUnM-E"
+    },
+    {
+      "id": 4,
+      "type": "train",
+      "start": [52.2297, 21.0122],
+      "startName": "",
+      "destinationName": "KRAKÓW",
+      "coords": [50.0647, 19.945],
+      "date": "majówka 2025",
+      "description": "Brak",
+      "imageUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=gBc-F8dWNxA"
+    },
+    {
+      "id": 5,
+      "type": "plane",
+      "start": [52.2297, 21.0122],
+      "startName": "",
+      "destinationName": "BUDAPESZT",
+      "coords": [47.4979, 19.0402],
+      "date": "lipiec 2025",
+      "description": "Brak",
+      "imageUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=vWL6IOn9ZwA"
+    }
+  ]
+}
