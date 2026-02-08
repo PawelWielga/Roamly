@@ -8,7 +8,7 @@ import {
   ALL_DESTINATIONS_ZOOM_OPTIONS,
   DETAILS_ZOOM_OPTIONS,
 } from '../constants/mapConfig';
-import { getVehicleColor, getVehicleMarkerSvg, getVehicleSvg } from '../constants/vehicleIcons';
+import { getVehicleColor, getVehicleMarkerSvg } from '../constants/vehicleIcons';
 
 /**
  * Serwis odpowiedzialny za zarzÄ…dzanie mapÄ… Leaflet
